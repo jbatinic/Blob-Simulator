@@ -2,10 +2,17 @@
 
 #include <iostream>
 #include "graphicalFunctions.h"
+#include "blob.h"
+
+#define MAXLOBS 20;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    srand(time(NULL));
+    blob testBlob = blob(5,20,30,3,5); 
+
+    printf("x: %f y: %f \nradius: %u \ndirection: %u ", testBlob.getPosx(), testBlob.getPosy(), testBlob.getblobRadius(), testBlob.getblobDirection());
+
 }
 
 
