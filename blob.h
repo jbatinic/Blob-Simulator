@@ -29,6 +29,7 @@ class blob
 {
 public:
 	//Constructores
+	blob();
 	blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
 
 	//Setters
@@ -36,9 +37,12 @@ public:
 	void setPosy(double posy_);
 	void setPosxnext(double posxnext_);
 	void setPosynext(double posynext_);
-	void setDirection(double Blobdirection_);
+	void setDirection(uint Blobdirection_);
 	void setDeathProb(float deathProb);
 	void setVelocity(int blobVelocity_);
+	void setfoodCount(uint foodCount_);
+	void setRadio(uint radio_);
+	void setPercentSpeed(float percentSpeed_);
 
 	//Getters
 	double getPosx(void);
@@ -53,7 +57,7 @@ public:
 	double checkRadius(blob&);
 	double checkFood(Food&);
 
-private:
+protected:
 	position_t blobPos;
 	uint blobDirection;
 	int blobVelocity;
@@ -61,8 +65,8 @@ private:
 	float deathProb;
 	uint foodCount;
 	float percentSpeed;
-
-	uint blobGroup;
+	uint maxFoodCount;
+//	uint blobGroup;
 };
 
 

@@ -4,6 +4,16 @@
 *			CONSTRUCTORES				*
 *****************************************/
 
+blob::blob(){
+	blobPos.x =0;
+	blobPos.y = 0;
+	deathProb = 0;
+	foodCount = 0;
+	blobRadius = 0;
+	percentSpeed = 0;
+	blobDirection = 0;
+}
+
 blob::blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
@@ -19,7 +29,7 @@ blob::blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_)
 /****************************************
 *			SETTERS		         		*
 *****************************************/
-void blob::setDirection(double blobDirection_)
+void blob::setDirection(uint blobDirection_)
 {
 	blobDirection = blobDirection_;
 	blobPos.xnext = blobPos.x + sin(PI * blobDirection_ / 180);
@@ -32,7 +42,9 @@ void blob::setPosx(double posx_) { blobPos.x = posx_; }
 void blob::setPosy(double posy_) { blobPos.y = posy_; }
 void blob::setPosxnext(double posxnext_) { blobPos.xnext = posxnext_; }
 void blob::setPosynext(double posynext_) { blobPos.ynext = posynext_; }
-
+void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
+void blob::setRadio(uint radio_) { blobRadius = radio_; }
+void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
 
 /****************************************
 *				GETTERS		     		*

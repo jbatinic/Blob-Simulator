@@ -3,16 +3,49 @@
 #include <iostream>
 #include "graphicalFunctions.h"
 #include "blob.h"
+#include "babyBlob.h"
+#include "goodOldBlob.h"
+#include "grownBlob.h"
 
-#define MAXLOBS 20;
+#define MAXBLOBS 10
+#define SPEED 3.5
 
+
+using namespace std;
 int main()
 {
     srand(time(NULL));
-    blob testBlob = blob(5,20,30,3,5); 
+    blob* blobArray = new grownBlob[MAXBLOBS];
 
-    printf("x: %f y: %f \nradius: %u \ndirection: %u ", testBlob.getPosx(), testBlob.getPosy(), testBlob.getblobRadius(), testBlob.getblobDirection());
+    uint i;
 
+    for (i = 0; i < MAXBLOBS; i++)
+    {
+        blobArray[i].setPosx(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
+        blobArray[i].setPosy(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
+        blobArray[i].setDeathProb(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+        blobArray[i].setfoodCount(0);
+        blobArray[i].setDirection(rand() % 360);
+        blobArray[i].setPercentSpeed(SPEED);
+    }
+
+    for (i = 0; i < MAXBLOBS; i++)
+    {
+        cout << "x:%f  " << blobArray[i].getPosx() << "y:%f" << blobArray[i].getPosy() << endl;
+    }
+    for (i = 0; i < MAXBLOBS; i++)
+    {
+        blobArray[i].moveBlob();
+    }
+    cout << "AFTER MOVING" << endl;
+
+    for (i = 0; i < MAXBLOBS; i++)
+    {
+        cout << "x:%f  " << blobArray[i].getPosx() << "y:%f" << blobArray[i].getPosy() << endl;
+    }
+
+    delete[] blobArray;
+    return 0;
 }
 
 
