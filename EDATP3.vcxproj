@@ -150,6 +150,7 @@
     <ClCompile Include="babyBlob.cpp" />
     <ClCompile Include="blob.cpp" />
     <ClCompile Include="EDATP3.cpp" />
+    <ClCompile Include="food.cpp" />
     <ClCompile Include="goodOldBlob.cpp" />
     <ClCompile Include="grownBlob.cpp" />
     <ClCompile Include="graphicalFuntions.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="babyBlob.h" />
     <ClInclude Include="blob.h" />
+    <ClInclude Include="food.h" />
     <ClInclude Include="goodOldBlob.h" />
     <ClInclude Include="graphicalFunctions.h" />
     <ClInclude Include="grownBlob.h" />

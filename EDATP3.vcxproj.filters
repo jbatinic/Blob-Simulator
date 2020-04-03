@@ -33,6 +33,9 @@
     <ClCompile Include="graphicalFuntions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="food.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blob.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="graphicalFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="food.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
