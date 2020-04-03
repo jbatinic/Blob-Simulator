@@ -4,14 +4,15 @@
 class food
 {
 public:
-	food();
+	//Constructores
+	food(void);
 	food(double posx_, double posy_);
 
 	//Getters
-	int getfoodRadius();
-	int getfoodPosx();
-	int getfoodPosy();
-	int getfoodTotal();
+	unsigned int getfoodRadius();
+	double getPosx_f();
+	double getPosy_f();
+	unsigned int getfoodTotal();
 
 	//Setters
 	void setPosx_f(double foodPosx_);
@@ -20,8 +21,8 @@ public:
 protected:
 	double foodPosx;
 	double foodPosy;
-	int foodRadius;
-	int foodTotalCount;
+	unsigned int foodRadius;
+	unsigned int foodTotalCount;
 };
 
 #endif

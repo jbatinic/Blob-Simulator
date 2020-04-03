@@ -1,6 +1,8 @@
 #include "food.h"
 
 food::food(void){
+	foodPosx = 0;
+	foodPosy = 0;
 }
 
 food::food(double posx_, double posy_)
@@ -24,5 +26,5 @@ void food::setPosy_f(double foodPosy_)
 //getters
 unsigned int food::getfoodRadius(void) { return foodRadius; }
 unsigned int food::getfoodTotal(void) { return foodTotalCount; }
-double food::getfoodPosx(void) { return foodPosx; }
-double food::getfoodPosy(void) { return foodPosy;  }
+double food::getPosx_f(void) { return foodPosx; }
+double food::getPosy_f(void) { return foodPosy;  }

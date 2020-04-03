@@ -3,20 +3,20 @@
 
 void start_blopping(blob* blopArray, food* fruitArray_)
 {
-	blop_smellRadius(blob * blobArray, food* fruitArray_);
+	blop_smellRadius(blopArray, fruitArray_);
 }
 
 /**************************************************************
 *															  *
 ***************************************************************/
-blop_smellRadius(blob* blobArray, food* frutaArray)
+void blop_smellRadius(blob* blobArray, food* frutaArray)
 {
 	uint i, j;
 	for (j = 0; j < (blob::blobTotalCount); j++)
 	{
 		for (i = 0; i < (frutaArray[i].getfoodTotal()); i++)
 		{
-			switch (blobArray[j].checkFood(&(frutaArray[i])))
+			switch ((blobArray[j].checkFood(&(frutaArray[i]))))
 			{
 			case 1:
 				blobArray[j].changeDirection(&(frutaArray[i]));

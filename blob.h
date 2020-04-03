@@ -25,7 +25,7 @@ typedef struct
 
 typedef unsigned int uint;
 
-class blob
+class blob 
 {
 public:
 	//Constructores
@@ -57,9 +57,9 @@ public:
 
 	//Funciones
 	void moveBlob(void);
-	double checkRadius(blob& blob2);
-	double checkFood(food& fruta);
-	void changeDirection(food& fruta);
+	double checkRadius(blob* blob2);
+	double checkFood(food* fruta);
+	void changeDirection(food* fruta);
 	
 
 
@@ -73,6 +73,7 @@ protected:
 	float percentSpeed;
 	uint maxFoodCount;
 //	uint blobGroup;
+
 };
 
 

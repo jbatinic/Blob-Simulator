@@ -30,14 +30,17 @@ int main()
 
     blob* blobArray = new babyBlob[MAXBLOBS];
    
+
     uint i;
+    
     for (i = 0; i < FRUTATOTAL; i++)
     {
         foodArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
         foodArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
     }
+    
 
-    for (i = 0; i < MAXBLOBS; i++)
+    for (i = 0; i < MAXBLOBS; i++)          //Este es MAXBLOBS, maximo total definido por nosotros
     {
         //https://stackoverflow.com/questions/686353/random-float-number-generation  
 
@@ -53,7 +56,7 @@ int main()
     
     if (MODO1)
     {
-        for (i = 0; i < BLOBCOUNT; i++)
+        for (i = 0; i < BLOBCOUNT; i++)             //Este es BLOBCCOUNT, cantidad de blobs definido por usuario
         {
             blobArray[i].setVelocity(VMAX);
         }
