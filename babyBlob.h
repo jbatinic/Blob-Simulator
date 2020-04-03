@@ -11,7 +11,6 @@ class babyBlob :
 public:
 	babyBlob();
 	babyBlob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
-
 };
 
 #endif //BABYBLOP_H

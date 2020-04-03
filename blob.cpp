@@ -1,9 +1,12 @@
 #include "blob.h"
 
+#define absolute(arg) ( ((arg) >= 0) ? arg : -arg) 
+
+uint blob::blobTotalCount = 0;
+
 /****************************************
 *			CONSTRUCTORES				*
 *****************************************/
-
 blob::blob(){
 	blobPos.x =0;
 	blobPos.y = 0;
@@ -16,7 +19,6 @@ blob::blob(){
 
 blob::blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_)
 {
-	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
 	blobPos.y = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (alto)));
 	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -88,15 +90,65 @@ void blob::moveBlob()
 	setPosy(tempNexty);
 }
 
-double blob::checkRadius(blob& blob2)		//Antes verificar que sean del mismo tipo (mismo radius)
+double blob::checkRadius(blob& blob2)		
 {
-	return ((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < (blobRadius * 2) * (blobRadius * 2);
+	if (blobRadius == blob2.getblobRadius())			//Si tienen el mismo radio son del mismo tipo
+		return (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y- blob2.getPosy())) < ((blobRadius * 2) * (blobRadius *2 )));
+	else
+		return 0;
 }
 
-double blob::checkFood(Food& fruta)
+double blob::checkFood(food& fruta)
 {
-	int r = blobRadius + fruta.foodRadius;
+	int r = blobRadius + fruta.getfoodRadius();
+	int result =0; 
 
-	return ((blobPos.x - fruta.foodPosx) * (blobPos.x - fruta.foodPosx) + (blobPos.y - fruta.foodPosy) * (blobPos.y - fruta.foodPosy)) < r * r;
+	if (((blobPos.x - fruta.getfoodPosx()) * (blobPos.x - fruta.getfoodPosx()) + (blobPos.y - fruta.getfoodPosy()) * (blobPos.y - fruta.getfoodPosy())) < r * r)
+		result = 1; //case1
+	else if (((blobPos.x - fruta.getfoodPosx()) * (blobPos.x - fruta.getfoodPosx()) + (blobPos.y - fruta.getfoodPosy()) * (blobPos.y - fruta.getfoodPosy())) < (r / 2))				//Estan casi superpuestos
+		result = 2; //case2
+
+	return result;
 }
 
+void blob::changeDirection(food& fruta)
+{
+	uint newDirection;
+	double change_x = blobPos.x - fruta.getfoodPosx();
+	double change_y = blobPos.y - fruta.getfoodPosy();
+
+	if (change_y > 0)
+	{
+		newDirection = (uint) atan(change_y / (absolute(change_y)));			//fruta abajo de blob
+		if (change_x > 0)
+			newDirection += 180;
+		else
+			newDirection = 180 - newDirection;
+	}
+	else                                                             //Fruta encima de blob
+	{
+		newDirection = (uint) atan(absolute(change_x) / (change_y * (-1)));
+		if (change_x > 0)
+			newDirection = 360 - newDirection;
+	}
+	setDirection(newDirection);
+}
+
+
+/*
+
+double blob::checkRadius(blob& blob1, blob& blob2)
+{
+	if (blob1.getblobRadius() == blob2.getblobRadius)			//Si tienen el mismo radio son del mismo tipo
+		return (((blob1.getPosx() - blob2.getPosx()) * (blob1.getPosx() - blob2.getPosx()) + (blob1.getPosy() - blob2.getPosy()) * (blob1.getPosx() - blob2.getPosy())) < ((blob1.getblobRadius() * 2) * (blob1.getblobRadius() * 2)));
+	else
+		return 0;
+}
+
+double blob::checkFood(food& fruta, blob& blob1)
+{
+	int r = blob1.getblobRadius() + fruta.getfoodRadius();
+	return ((blob1.getPosx() - fruta.getfoodPosx) * (blob1.getPosx() - fruta.getfoodPosx) + (blob1.getPosy() - fruta.getfoodPosy) * (blob1.getPosy() - fruta.getfoodPosy)) < r * r;
+}
+
+*/

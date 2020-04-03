@@ -9,7 +9,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#include "Food.h"
+#include "food.h"
 
 #define WIDTH 60
 #define HEIGHT 50
@@ -31,6 +31,9 @@ public:
 	//Constructores
 	blob();
 	blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
+
+	//static 
+	static uint blobTotalCount;
 
 	//Setters
 	void setPosx(double posx_);
@@ -54,8 +57,11 @@ public:
 
 	//Funciones
 	void moveBlob(void);
-	double checkRadius(blob&);
-	double checkFood(Food&);
+	double checkRadius(blob& blob2);
+	double checkFood(food& fruta);
+	void changeDirection(food& fruta);
+	
+
 
 protected:
 	position_t blobPos;
