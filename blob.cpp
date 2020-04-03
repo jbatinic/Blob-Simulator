@@ -17,7 +17,7 @@ blob::blob(void){
 	blobDirection = 0;
 }
 
-blob::blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_)
+blob::blob(uint ancho, uint alto, uint radio_, float percentSpeed_)
 {
 	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
 	blobPos.y = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (alto)));
@@ -47,6 +47,7 @@ void blob::setPosynext(double posynext_) { blobPos.ynext = posynext_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
 void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
+void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
 
 /****************************************
 *				GETTERS		     		*
@@ -55,8 +56,10 @@ double blob::getPosx(void) { return blobPos.x; }
 double blob::getPosy(void) { return blobPos.y; }
 double blob::getPosxnext(void) { return blobPos.xnext; }
 double blob::getPosynext(void) { return blobPos.ynext; }
+double blob::getPercentSpeed(void) { return percentSpeed; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
+
 
 /****************************************
 *			FUNCIONES					*
@@ -98,7 +101,7 @@ double blob::checkRadius(blob* blob2)		//COMO REFERENCIA?
 		return 0;
 }
 
-double blob::checkFood(food* fruta)		//COMO PUNTERO?
+int blob::checkFood(food* fruta)		//COMO PUNTERO?
 {
 	int r = blobRadius + fruta->getfoodRadius();
 	int result =0; 
@@ -134,7 +137,26 @@ void blob::changeDirection(food* fruta)
 	setDirection(newDirection);
 }
 
+void blob::blobFeeding(blob* blobArray)
+{
+	if(++foodCount >= maxFoodCount)
+	{
+		blobBirth(blobArray);
+	}
+}
 
+void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 
+												//cparametros seran blob* y tipo_de_blob&
+{
+	uint count = blob::increaseCount();
+//	blobArray[count] = blob::blob(WIDTH, HEIGHT,blobArray[0].getblobRadius,blobArray[0].getPercentSpeed());
+}
+
+uint blob::increaseCount(void)
+{
+	blobTotalCount++;
+	return blobTotalCount;
+}
 /*
 double blob::checkRadius(blob& blob1, blob& blob2)
 {

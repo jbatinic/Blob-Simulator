@@ -22,8 +22,8 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 				blobArray[j].changeDirection(&(frutaArray[i]));
 				break;
 			case 2:
-				//blobArray[j].blobFeeding();
-				//frutaArray[i].byeFruta();
+				blobArray[j].blobFeeding(blobArray);	
+				//frutaArray[i].byeFruta();				habria que hacer un destructor?
 				break;
 			default:
 				break;

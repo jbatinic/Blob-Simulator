@@ -11,7 +11,7 @@ babyBlob::babyBlob() {
 	maxFoodCount = 0;
 }
 
-babyBlob::babyBlob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_)
+babyBlob::babyBlob(uint ancho, uint alto, float percentSpeed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
@@ -22,4 +22,11 @@ babyBlob::babyBlob(uint speed, uint ancho, uint alto, uint radio_, float percent
 	percentSpeed = percentSpeed_;
 	blobDirection = rand() % 360;
 	maxFoodCount = BABYMAXFOOD;
+}
+
+void babyBlob::blobBirth(babyBlob* blobArray)
+{
+	uint count = blob::increaseCount();
+	blobArray[count] = babyBlob(WIDTH,HEIGHT,blobArray[0].getPercentSpeed());
+
 }

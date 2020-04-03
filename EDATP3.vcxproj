@@ -154,6 +154,7 @@
     <ClCompile Include="goodOldBlob.cpp" />
     <ClCompile Include="grownBlob.cpp" />
     <ClCompile Include="graphicalFuntions.cpp" />
+    <ClCompile Include="blopping.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="babyBlob.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="goodOldBlob.h" />
     <ClInclude Include="graphicalFunctions.h" />
     <ClInclude Include="grownBlob.h" />
+    <ClInclude Include="blopping.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

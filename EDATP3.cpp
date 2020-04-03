@@ -29,18 +29,11 @@ int main()
     food* foodArray = new food[FRUTATOTAL];
 
     blob* blobArray = new babyBlob[MAXBLOBS];
-   
+    blob::blobTotalCount = BLOBCOUNT; //definida por usuario
 
     uint i;
     
-    for (i = 0; i < FRUTATOTAL; i++)
-    {
-        foodArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
-        foodArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
-    }
-    
-
-    for (i = 0; i < MAXBLOBS; i++)          //Este es MAXBLOBS, maximo total definido por nosotros
+    for (i = 0; i < BLOBCOUNT; i++)          //Este es BLOBCOUNT, blobs definidos por usuario para empezar
     {
         //https://stackoverflow.com/questions/686353/random-float-number-generation  
 
@@ -50,27 +43,34 @@ int main()
         blobArray[i].setfoodCount(0);
         blobArray[i].setDirection(rand() % 360);
         blobArray[i].setPercentSpeed(SPEED);
+        blobArray[i].setRadio(BABYRADIO);           //Empiezan todos BABY BLOBS
+        blobArray[i].setfoodMax(BABYMAXFOOD);
     }
 
+    for (i = 0; i < FRUTATOTAL; i++)
+    {
+        foodArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
+        foodArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
+    }
 
     
     if (MODO1)
     {
-        for (i = 0; i < BLOBCOUNT; i++)             //Este es BLOBCCOUNT, cantidad de blobs definido por usuario
+        for (i = 0; i < MAXBLOBS; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
         {
             blobArray[i].setVelocity(VMAX);
         }
     }
     else if (MODO2)
     {
-        for (i = 0; i < BLOBCOUNT; i++)
+        for (i = 0; i < MAXBLOBS; i++)
         {
             blobArray[i].setVelocity(randomVelocity(VMAX, VMIN));
         }
     }
     
 
- //  start_blopping(blobArray, foodArray);
+   start_blopping(blobArray, foodArray);
 
     
 

@@ -30,10 +30,11 @@ class blob
 public:
 	//Constructores
 	blob();
-	blob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
+	blob(uint ancho, uint alto, uint radio_, float percentSpeed_);
 
 	//static 
 	static uint blobTotalCount;
+	static uint increaseCount(void);
 
 	//Setters
 	void setPosx(double posx_);
@@ -46,22 +47,27 @@ public:
 	void setfoodCount(uint foodCount_);
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
+	void setfoodMax(uint maxFoodCount_);
 
 	//Getters
 	double getPosx(void);
 	double getPosy(void);
 	double getPosxnext(void);
 	double getPosynext(void);
+	double getPercentSpeed(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
+
+
 
 	//Funciones
 	void moveBlob(void);
 	double checkRadius(blob* blob2);
-	double checkFood(food* fruta);
+	int checkFood(food* fruta);
 	void changeDirection(food* fruta);
+	void blobFeeding(blob* blobArray);
+	virtual void blobBirth(blob* blobArray);
 	
-
 
 protected:
 	position_t blobPos;
@@ -72,6 +78,7 @@ protected:
 	uint foodCount;
 	float percentSpeed;
 	uint maxFoodCount;
+
 //	uint blobGroup;
 
 };
