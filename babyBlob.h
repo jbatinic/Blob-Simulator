@@ -2,7 +2,7 @@
 #define BABYBLOP_H
 
 #include "blob.h"
-#define BABYRADIO 2
+#define BABYRADIO 4
 #define BABYMAXFOOD 3
 
 class babyBlob :
@@ -10,7 +10,7 @@ class babyBlob :
 {
 public:
 	babyBlob();
-	babyBlob(uint ancho, uint alto, float percentSpeed_);
+	babyBlob(uint ancho, uint alto, double percentSpeed_);
 	virtual void blobBirth(babyBlob* blob);
 
 };

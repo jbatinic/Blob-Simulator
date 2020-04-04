@@ -2,16 +2,17 @@
 #define GOODOLDBLOB_H
 
 #include "blob.h"
-#define OLDRADIO 5
-#define OLDMAXFOOD 5 //nO ME acuerdo estos max values
+#define OLDRADIO 8
+#define OLDMAXFOOD 5
 
 class goodOldBlob :
 	public blob
 {
 public:
 	goodOldBlob();
-	goodOldBlob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
-
+	goodOldBlob(uint ancho, uint alto,double percentSpeed_);
+	virtual void blobBirth(goodOldBlob* blob);
 };
+
 
 #endif //GOODOLDBLOB_h

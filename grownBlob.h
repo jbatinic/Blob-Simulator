@@ -2,16 +2,16 @@
 #define GROWNBLOB
 
 #include "blob.h"
-#define GROWNRADIO 3
-#define GROWNMAXFOOD 3 //nO ME acuerdo estos max values
+#define GROWNRADIO 16
+#define GROWNMAXFOOD 4 
 
 class grownBlob :
 	public blob
 {
 public:
 	grownBlob();
-	grownBlob(uint speed, uint ancho, uint alto, uint radio_, float percentSpeed_);
-
+	grownBlob(uint ancho, uint alto, double percentSpeed_);
+	virtual void blobBirth(grownBlob* blob);
 };
 
 #endif //GROWNBLOB_

@@ -57,7 +57,7 @@ public:
 	double getPercentSpeed(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
-
+	uint getfoodCount(void);
 
 
 	//Funciones
@@ -76,7 +76,7 @@ protected:
 	uint blobRadius;
 	float deathProb;
 	uint foodCount;
-	float percentSpeed;
+	double percentSpeed;
 	uint maxFoodCount;
 
 //	uint blobGroup;

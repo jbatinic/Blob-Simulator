@@ -14,7 +14,9 @@ blob::blob(void){
 	foodCount = 0;
 	blobRadius = 0;
 	percentSpeed = 0;
+	maxFoodCount = 0;
 	blobDirection = 0;
+	blobVelocity = 0;
 }
 
 blob::blob(uint ancho, uint alto, uint radio_, float percentSpeed_)
@@ -25,19 +27,13 @@ blob::blob(uint ancho, uint alto, uint radio_, float percentSpeed_)
 	foodCount = 0;
 	blobRadius = radio_;
 	percentSpeed = percentSpeed_;
-	blobDirection = rand() % 360;
+	blobDirection = rand()%360;
 }
 
 /****************************************
 *			SETTERS		         		*
 *****************************************/
-void blob::setDirection(uint blobDirection_)
-{
-	blobDirection = blobDirection_;
-	blobPos.xnext = blobPos.x + sin(PI * blobDirection_ / 180);
-	blobPos.ynext = blobPos.y + cos(PI * blobDirection_ / 180);
-}
-
+void blob::setDirection(uint blobDirection_){blobDirection = blobDirection_;}
 void blob::setDeathProb(float deathProb_) { deathProb = deathProb_; }
 void blob::setVelocity(int blobVelocity_) { blobVelocity = blobVelocity_; }
 void blob::setPosx(double posx_) { blobPos.x = posx_; }
@@ -59,6 +55,7 @@ double blob::getPosynext(void) { return blobPos.ynext; }
 double blob::getPercentSpeed(void) { return percentSpeed; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
+uint blob::getfoodCount(void) { return foodCount; }
 
 
 /****************************************
@@ -66,37 +63,42 @@ uint blob::getblobDirection(void) { return blobDirection; }
 *****************************************/
 void blob::moveBlob()
 {
-	double tempNextx = getPosx() + sin(PI * getblobDirection() / 180);
-	double tempNexty = getPosy() + cos(PI * getblobDirection() / 180);
+	int i;
+	double tempNextx = 0, tempNexty = 0;
 
-	if (tempNextx < 0)
+	for (i = 0; i < blobVelocity; i++)
 	{
-		tempNextx += WIDTH;
-	}
+		tempNextx = (blobPos.x + sin(PI * (double)blobDirection / 180.0));
+		tempNexty = (blobPos.y + cos(PI * (double)blobDirection / 180.0));
 
-	if (tempNextx > WIDTH)
-	{
-		tempNextx -= WIDTH;
-	}
+		if (tempNextx < 0)
+		{
+			tempNextx += WIDTH;
+		}
 
-	if (tempNexty < 0)
-	{
-		tempNexty += HEIGHT;
-	}
+		if (tempNextx > WIDTH)
+		{
+			tempNextx -= WIDTH;
+		}
 
-	if (tempNexty > HEIGHT)
-	{
-		tempNexty -= HEIGHT;
-	}
+		if (tempNexty < 0)
+		{
+			tempNexty += HEIGHT;
+		}
 
+		if (tempNexty > HEIGHT)
+		{
+			tempNexty -= HEIGHT;
+		}
 	setPosx(tempNextx);
 	setPosy(tempNexty);
+	}
 }
 
 double blob::checkRadius(blob* blob2)		//COMO REFERENCIA?
 {
 	if (blobRadius == blob2->getblobRadius())			//Si tienen el mismo radio son del mismo tipo
-		return (((blobPos.x - blob2->getPosx()) * (blobPos.x - blob2->getPosx()) + (blobPos.y - blob2->getPosy()) * (blobPos.y- blob2->getPosy())) < ((blobRadius * 2) * (blobRadius *2 )));
+		return (((blobPos.x - blob2->getPosx()) * (blobPos.x - blob2->getPosx()) + (blobPos.y - blob2->getPosy()) * (blobPos.y- blob2->getPosy())) < ((double)blobRadius * 4 * (double)blobRadius )); //hacemos el cuadrado de la suma de los radios, por eso r*r*4
 	else
 		return 0;
 }
@@ -106,10 +108,14 @@ int blob::checkFood(food* fruta)		//COMO PUNTERO?
 	int r = blobRadius + fruta->getfoodRadius();
 	int result =0; 
 
-	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < r * r)
+	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < (double)r * (double)r)
+	{
 		result = 1; //case1 SE ACERCA
-	else if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < (r / 2))				//Estan casi superpuestos
+	}
+	else if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < ((double)r* (double)r*0.25))
+	{//Estan casi superpuestos
 		result = 2; //case2 SE LO COME
+	}
 
 	return result;
 }
@@ -139,9 +145,9 @@ void blob::changeDirection(food* fruta)
 
 void blob::blobFeeding(blob* blobArray)
 {
-	if(++foodCount >= maxFoodCount)
+	if(foodCount >= maxFoodCount)
 	{
-		blobBirth(blobArray);
+		blobBirth(blobArray);			//EXCEPTION READ ACCESS VIOLATION
 	}
 }
 
@@ -157,6 +163,7 @@ uint blob::increaseCount(void)
 	blobTotalCount++;
 	return blobTotalCount;
 }
+
 /*
 double blob::checkRadius(blob& blob1, blob& blob2)
 {

@@ -4,6 +4,7 @@
 void start_blopping(blob* blopArray, food* fruitArray_)
 {
 	blop_smellRadius(blopArray, fruitArray_);
+
 }
 
 /**************************************************************
@@ -20,9 +21,12 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 			{
 			case 1:
 				blobArray[j].changeDirection(&(frutaArray[i]));
+				printf("\nCHANGED DIRECTION of blob %u\n",j);
 				break;
 			case 2:
+				blobArray[j].setfoodCount((blobArray[j].getfoodCount()) + 1);
 				blobArray[j].blobFeeding(blobArray);	
+				printf("\n CASE EATEN\n");
 				//frutaArray[i].byeFruta();				habria que hacer un destructor?
 				break;
 			default:
