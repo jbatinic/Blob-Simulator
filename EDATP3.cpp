@@ -10,16 +10,17 @@
 #include "food.h"
 #include <stdio.h>
 
-//tood esto lo definira user
-#define SPEED 2     
-#define VMAX 5	
-#define VMIN 1	
 #define MAXBLOBS 700
 #define MAXFRUTA 400
+#define VMIN 1
+//tood esto lo definira user ANTES DE INICIAR   
+#define SPEED 2     
+#define VMAX 5	            //DEPENDE MODO 1 O 2    
 #define FOODCOUNT 30
 #define MODO1 1 
 #define MODO2 0
 #define BLOBCOUNT 10
+#define RANDOMJIGGLE 2   //ENTRE 0 Y 360
 
 //function nose donde ponerla
 int randomVelocity(int vmax, int vmin);
@@ -45,7 +46,9 @@ int main()
                             random_deathProb,
                             speed,
                             radio,
-                            max_food_count_);
+                            max_food_count,
+                            randomjiggle);
+
         */
                                       //https://stackoverflow.com/questions/686353/random-float-number-generation  
          blobArray[i]= blob((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH)))),
@@ -53,7 +56,8 @@ int main()
                             (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)),
                              SPEED,
                              BABYRADIO,
-                             BABYMAXFOOD);
+                             BABYMAXFOOD,
+                             RANDOMJIGGLE);
     
     }
 
@@ -92,18 +96,3 @@ int randomVelocity(int vmax, int vmin)
 {
     return rand() % (vmax - vmin + 1) + vmin;
 }
-
-
-/*
-preguntar pq esto no funcionaria
-
-    food* foodArray = new food[MAXFRUTA];
-    double x_position;
-    double y_position;
-
-    for (i = 0; i < MAXFRUTA; i++)
-    {
-        foodArray[i].food(x_position,y_position);
-    }
-
-*/

@@ -15,6 +15,6 @@ void blob_smellBlob(blob* blobArray);
 
 bool do_blob_merge(blob* blob1 , blob& blob2 );		
 
-
+uint randomJiggle(uint newDirection_, uint randomJiggle);
 
 #endif //BLOPPING_H

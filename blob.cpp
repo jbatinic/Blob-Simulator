@@ -21,7 +21,7 @@ blob::blob(void){
 	mergeFlag = false; 
 }
 
-blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ )
+blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ , uint RandomJiggle_)
 {
 	blobPos.x = posx_;
 	blobPos.y = posy_;
@@ -34,9 +34,8 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 	foodCount = 0;
 	percentSpeed =speed_;
 
-
 	blobVelocity = 0;	//La inicializo pero vamos a escribir sobre ella depsues
-	
+	RandomJiggle = RandomJiggle_;
 
 
 }
@@ -57,7 +56,7 @@ void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; 
 void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
 ///void blob::setNewMergeDirection(uint blobMergeDirection_) { blobMergeDirection = ????? }
 void blob::setMergeFlag(void) { mergeFlag = true; }
-
+void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_;  }
 /****************************************
 *				GETTERS		     		*
 *****************************************/
@@ -65,10 +64,11 @@ double blob::getPosx(void) { return blobPos.x; }
 double blob::getPosy(void) { return blobPos.y; }
 double blob::getPosxnext(void) { return blobPos.xnext; }
 double blob::getPosynext(void) { return blobPos.ynext; }
-double blob::getPercentSpeed(void) { return percentSpeed; }
+uint blob::getblobVelocity(void) { return blobVelocity; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
 uint blob::getfoodCount(void) { return foodCount; }
+uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
 
 /****************************************
@@ -184,7 +184,8 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 		(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)),
 		BLOBSPEED,
 		BLOBRADIO,
-		BLOBMAXFOOD);
+		BLOBMAXFOOD,
+		rand()%360);
 }
 
 uint blob::increaseCount(void){return ++blobTotalCount; }
@@ -198,7 +199,7 @@ void blob::blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
 
 	//se determinan en llamada a constructor:
 	//radio -> evolucionado
-	//maxFoodcount -> evolucionad
+	//maxFoodcount -> evolucionado
 	blob::increaseCount();
 
 }

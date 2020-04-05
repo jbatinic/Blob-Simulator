@@ -11,7 +11,7 @@ grownBlob::grownBlob() {
 	maxFoodCount = 0;
 }
 
-grownBlob::grownBlob(double posx_, double posy_, uint direction_, double percentSpeed_)
+grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = posx_;
@@ -19,7 +19,7 @@ grownBlob::grownBlob(double posx_, double posy_, uint direction_, double percent
 	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	foodCount = 0;
 	blobRadius = GROWNRADIO;
-	percentSpeed = percentSpeed_;
+	blobVelocity = Speed_;
 	blobDirection = direction_;
 	maxFoodCount = GROWNMAXFOOD;
 }

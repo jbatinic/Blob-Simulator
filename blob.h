@@ -37,7 +37,7 @@ class blob
 public:
 	//Constructores
 	blob();
-	blob(double posx_, double posy_, float deathProb_, double speed_, uint radio_, uint maxFoodCount_);
+	blob(double posx_, double posy_, float deathProb_, double speed_, uint radio_, uint maxFoodCount_, uint RandomJiggle_);
 	
 	//static 
 	static uint blobTotalCount;
@@ -57,17 +57,20 @@ public:
 	void setfoodMax(uint maxFoodCount_);
 //	void setNewMergeDirection(uint blobMergeDirection_);
 	void setMergeFlag(void);
+	void setRandomJiggle(uint RandomJiggle_);
 
 	//Getters
 	double getPosx(void);
 	double getPosy(void);
 	double getPosxnext(void);
 	double getPosynext(void);
-	double getPercentSpeed(void);
+	uint getblobVelocity(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
 	uint getfoodCount(void);
+	uint getRandomJiggle(void);
 	bool getMergeFlag(void);
+	
 
 	//Funciones
 	void moveBlob(void);
@@ -91,6 +94,7 @@ protected:
 
 	uint blobMergeDirection;
 	bool mergeFlag;
+	uint RandomJiggle; 
 };
 
 
