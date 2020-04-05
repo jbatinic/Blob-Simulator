@@ -17,19 +17,28 @@ blob::blob(void){
 	maxFoodCount = 0;
 	blobDirection = 0;
 	blobVelocity = 0;
+	blobMergeDirection = 0;
+	mergeFlag = false; 
 }
 
-blob::blob(uint ancho, uint alto, uint radio_, float percentSpeed_)
+blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ )
 {
-	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
-	blobPos.y = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (alto)));
-	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	foodCount = 0;
+	blobPos.x = posx_;
+	blobPos.y = posy_;
+	deathProb = deathProb_;
 	blobRadius = radio_;
-	percentSpeed = percentSpeed_;
+	maxFoodCount = maxFoodCount_;
 	blobDirection = rand()%360;
 	blobMergeDirection = blobDirection; 
 	mergeFlag = false;
+	foodCount = 0;
+	percentSpeed =speed_;
+
+
+	blobVelocity = 0;	//La inicializo pero vamos a escribir sobre ella depsues
+	
+
+
 }
 
 /****************************************
@@ -169,12 +178,18 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 												//cparametros seran blob* y tipo_de_blob&
 {
 	uint count = blob::increaseCount();
-	blobArray[count] = blob::blob(WIDTH, HEIGHT,blobArray[0].getblobRadius(),blobArray[0].getPercentSpeed());
+
+	blobArray[count] = blob((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH)))),
+		(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT)))),
+		(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)),
+		BLOBSPEED,
+		BLOBRADIO,
+		BLOBMAXFOOD);
 }
 
 uint blob::increaseCount(void){return ++blobTotalCount; }
 
-void blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
+void blob::blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
 { 
 	//crear un nuevo blob de tipo evolucionado
 	//direccion: suma del promedio entre los blobs obtenida en merge_new_direction

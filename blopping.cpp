@@ -50,6 +50,8 @@ void blob_smellBlob(blob* blobArray)
 
 	for (j = 0, mergeTotal = 0, newMergeDirection=0; j < (blob::blobTotalCount); j++)
 	{
+		p_2_Directions = array_of_Directions;	//Sobreescribimos las direcciones ya guardadas en este array 
+
 		for (i = 0; i < (blob::blobTotalCount); i++)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
@@ -94,10 +96,9 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 {
 	bool return_val = false;
 	switch (blob1->checkRadius(blob2))  //Vemos si se superponen los bitmaps
-	{
-		// missing ':' before ';' no encuentro CARAJO
+	{ 
 	case MERGE:
-		if (blob1->getblobRadius != OLDRADIO)
+		if (blob1->getblobRadius() != OLDRADIO)
 		{
 			blob1->setMergeFlag();
 			return_val = true;

@@ -38,15 +38,23 @@ int main()
     
     for (i = 0; i < BLOBCOUNT; i++)          //Este es BLOBCOUNT, blobs definidos por usuario para empezar
     {
-        //https://stackoverflow.com/questions/686353/random-float-number-generation  
-        blobArray[i].setPosx(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
-        blobArray[i].setPosy(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
-        blobArray[i].setDeathProb(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-        blobArray[i].setfoodCount(0);
-        blobArray[i].setDirection(rand()%360);
-        blobArray[i].setPercentSpeed(SPEED);
-        blobArray[i].setRadio(BABYRADIO);           //Empiezan todos BABY BLOBS
-        blobArray[i].setfoodMax(BABYMAXFOOD);
+        //Empiezan todos BABY BLOBS
+        /*      
+         blobArray[i]= blob(random_position_x,
+                            random_position_y,
+                            random_deathProb,
+                            speed,
+                            radio,
+                            max_food_count_);
+        */
+                                      //https://stackoverflow.com/questions/686353/random-float-number-generation  
+         blobArray[i]= blob((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH)))),
+                            (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT)))),
+                            (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)),
+                             SPEED,
+                             BABYRADIO,
+                             BABYMAXFOOD);
+    
     }
 
     for (i = 0; i < FOODCOUNT; i++)

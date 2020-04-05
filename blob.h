@@ -14,9 +14,14 @@
 #define WIDTH 60
 #define HEIGHT 50
 #define PI 3.14159265
-#define MERGE 1;
-#define BLOBSALUDO 2;
-#define NOTCLOSE 0; 
+#define MERGE 1
+#define BLOBSALUDO 2
+#define NOTCLOSE 0
+
+#define BLOBSPEED 1.0
+#define BLOBRADIO 5
+#define BLOBMAXFOOD 5
+
 typedef struct
 {
 	double x;
@@ -32,8 +37,8 @@ class blob
 public:
 	//Constructores
 	blob();
-	blob(uint ancho, uint alto, uint radio_, float percentSpeed_);
-
+	blob(double posx_, double posy_, float deathProb_, double speed_, uint radio_, uint maxFoodCount_);
+	
 	//static 
 	static uint blobTotalCount;
 	static uint increaseCount(void);
@@ -71,7 +76,7 @@ public:
 	void changeDirection(food* fruta);
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
-	virtual void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
+	void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
 
 
 protected:
