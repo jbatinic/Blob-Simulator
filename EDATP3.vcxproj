@@ -199,6 +199,12 @@
     <ClCompile Include="grownBlob.cpp" />
     <ClCompile Include="graphicalFuntions.cpp" />
     <ClCompile Include="blopping.cpp" />
+    <ClCompile Include="Imgui_files\imgui.cpp" />
+    <ClCompile Include="Imgui_files\imgui_demo.cpp" />
+    <ClCompile Include="Imgui_files\imgui_draw.cpp" />
+    <ClCompile Include="Imgui_files\imgui_impl_allegro5.cpp" />
+    <ClCompile Include="Imgui_files\imgui_widgets.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="babyBlob.h" />
@@ -208,8 +214,16 @@
     <ClInclude Include="graphicalFunctions.h" />
     <ClInclude Include="grownBlob.h" />
     <ClInclude Include="blopping.h" />
+    <ClInclude Include="Imgui_files\imconfig.h" />
+    <ClInclude Include="Imgui_files\imgui.h" />
+    <ClInclude Include="Imgui_files\imgui_impl_allegro5.h" />
+    <ClInclude Include="Imgui_files\imgui_internal.h" />
+    <ClInclude Include="Imgui_files\imstb_rectpack.h" />
+    <ClInclude Include="Imgui_files\imstb_textedit.h" />
+    <ClInclude Include="Imgui_files\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Imgui_files\imgui.ini" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
