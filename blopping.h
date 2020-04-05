@@ -13,7 +13,7 @@ void blop_smellRadius(blob* blobArray, food* frutaArray);
 
 void blob_smellBlob(blob* blobArray);
 
-bool do_blob_merge(blob* blob1 , blob& blob2 );
+bool do_blob_merge(blob* blob1 , blob& blob2 );		
 
 
 

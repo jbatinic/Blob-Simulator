@@ -51,8 +51,7 @@ int main()
 
     for (i = 0; i < FOODCOUNT; i++)
     {
-        foodArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
-        foodArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
+        foodArray[i] = food((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / WIDTH))), (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / HEIGHT))));
     }
 
     
@@ -71,27 +70,7 @@ int main()
         }
     }
 
-   int j = 0;
-   do
-   {
-        for (i = 0; i < blob::blobTotalCount; i++)
-        {
-           printf("Blob %u - x: %f y: %f            FOOD COUNT:%u\n", i, blobArray[i].getPosx(), blobArray[i].getPosy(), blobArray[i].getfoodCount());
-           blobArray[i].moveBlob();
-        }
 
-        start_blopping(blobArray, foodArray);
-
-        for (i = 0; i < blob::blobTotalCount; i++)
-        {
-            printf("Blob %u - x: %f y: %f            FOOD COUNT:%u\n", i, blobArray[i].getPosx(), blobArray[i].getPosy(), blobArray[i].getfoodCount());
-            blobArray[i].moveBlob();
-        }
-                   
-        printf("\n");
-
-   } while (++j<40);
-    
 
 
     delete[] blobArray;

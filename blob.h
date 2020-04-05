@@ -86,9 +86,6 @@ protected:
 
 	uint blobMergeDirection;
 	bool mergeFlag;
-
-//	uint blobGroup;
-
 };
 
 

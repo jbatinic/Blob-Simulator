@@ -169,14 +169,10 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 												//cparametros seran blob* y tipo_de_blob&
 {
 	uint count = blob::increaseCount();
-//	blobArray[count] = blob::blob(WIDTH, HEIGHT,blobArray[0].getblobRadius,blobArray[0].getPercentSpeed());
+	blobArray[count] = blob::blob(WIDTH, HEIGHT,blobArray[0].getblobRadius(),blobArray[0].getPercentSpeed());
 }
 
-uint blob::increaseCount(void)
-{
-	blobTotalCount++;
-	return blobTotalCount;
-}
+uint blob::increaseCount(void){return ++blobTotalCount; }
 
 void blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
 { 
@@ -185,6 +181,9 @@ void blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
 	//posicion es misma que blob J
 	//velocidad: promedio de velocidades
 
+	//se determinan en llamada a constructor:
+	//radio -> evolucionado
+	//maxFoodcount -> evolucionad
 	blob::increaseCount();
 
 }

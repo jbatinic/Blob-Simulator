@@ -40,7 +40,7 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 
 void blob_smellBlob(blob* blobArray)
 {
-	uint i, j, mergeTotal;
+	uint i, j, mergeTotal, newMergeDirection;
 	uint* array_of_Directions = (uint*)malloc(sizeof(uint) * blob::blobTotalCount);  //Un array de las direcciones de los blobs con los que el Blob j se mergiara
 																							//Sera utilizado para hallar la nueva direccion promedio
 	uint* p_2_Directions = array_of_Directions;		//Con este me manejo para guardar las direcciones y el otro lo dejo como esta 
@@ -48,7 +48,7 @@ void blob_smellBlob(blob* blobArray)
 
 	//PREGUNTAR SI HAY FORMA MAS LINDA DE HACER ESO^
 
-	for (j = 0, mergeTotal = 0; j < (blob::blobTotalCount); j++)
+	for (j = 0, mergeTotal = 0, newMergeDirection=0; j < (blob::blobTotalCount); j++)
 	{
 		for (i = 0; i < (blob::blobTotalCount); i++)
 		{
@@ -67,11 +67,18 @@ void blob_smellBlob(blob* blobArray)
 			switch (blobArray[j].getblobRadius())
 			{
 			case BABYRADIO:
-				blobArray[j].blobMerge((babyBlob*)blobArray, array_of_Directions, mergeTotal);
+				//create new grown blob
+				blobArray[j].increaseCount();
+				newMergeDirection = 4; //ACA LLAMAR A FUNCION RADOM JIGGLE CON ARRAY OF DIRECTIONS Y MERGE TOTAL PARA SACAR PROMEDIO
+				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, blobArray[j].getPercentSpeed());
 				//DESTROY BLOB J
 				break;
+
 			case GROWNRADIO:
-				blobArray[j].blobMerge((grownBlob*)blobArray, array_of_Directions, mergeTotal);
+				//create new old blob 
+				blobArray[j].increaseCount();
+				newMergeDirection = 4; //ACA LLAMAR A FUNCION RADOM JIGGLE CON ARRAY OF DIRECTIONS Y MERGE TOTAL PARA SACAR PROMEDIO
+				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, blobArray[j].getPercentSpeed());
 				//DESTROY BLOB J
 				break;
 			default:
@@ -88,6 +95,7 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	bool return_val = false;
 	switch (blob1->checkRadius(blob2))  //Vemos si se superponen los bitmaps
 	{
+		// missing ':' before ';' no encuentro CARAJO
 	case MERGE:
 		if (blob1->getblobRadius != OLDRADIO)
 		{
