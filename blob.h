@@ -57,6 +57,7 @@ public:
 	void setfoodMax(uint maxFoodCount_);
 //	void setNewMergeDirection(uint blobMergeDirection_);
 	void setMergeFlag(void);
+	void getblobStatus(uint isAliveFlag);
 	void setRandomJiggle(uint RandomJiggle_);
 
 	//Getters
@@ -67,6 +68,7 @@ public:
 	uint getblobVelocity(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
+	uint getblobStatus(void);
 	uint getfoodCount(void);
 	uint getRandomJiggle(void);
 	bool getMergeFlag(void);
@@ -87,6 +89,7 @@ protected:
 	uint blobDirection;
 	int blobVelocity;
 	uint blobRadius;
+	uint isAliveFlag;
 	float deathProb;
 	uint foodCount;
 	double percentSpeed;
