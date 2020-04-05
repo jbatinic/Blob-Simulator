@@ -51,7 +51,7 @@ void blob_smellBlob(blob* blobArray)
 	for (j = 0, mergeTotal = 1, newMergeDirection=0, newMergeVelocity=0; j < (blob::blobTotalCount); j++)
 	{
 		p_2_Directions = array_of_Directions;	//Sobreescribimos las direcciones ya guardadas en este array 
-		for (i = 0; i < (blob::blobTotalCount); i++)
+		for (i =0 ; i < blob::blobTotalCount ; i++)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{

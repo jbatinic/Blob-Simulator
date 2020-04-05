@@ -94,7 +94,6 @@ protected:
 	uint foodCount;
 	double percentSpeed;
 	uint maxFoodCount;
-
 	uint blobMergeDirection;
 	bool mergeFlag;
 	uint RandomJiggle; 

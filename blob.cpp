@@ -19,6 +19,7 @@ blob::blob(void){
 	blobVelocity = 0;
 	blobMergeDirection = 0;
 	mergeFlag = false; 
+	isAliveFlag = 1;
 }
 
 blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ , uint RandomJiggle_)
@@ -108,7 +109,8 @@ void blob::moveBlob()
 	}
 }
 
-int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
+int blob::
+(blob& blob2)		//COMO REFERENCIA?
 {
 	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobRadius * 4 * (double)blobRadius)); 
 	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4
