@@ -4,6 +4,7 @@
 void start_blopping(blob* blopArray, food* fruitArray_)
 {
 	blop_smellRadius(blopArray, fruitArray_);
+	blop_merge();
 
 }
 
@@ -32,6 +33,39 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 			default:
 				break;
 			}
+		}
+	}
+}
+
+void blop_merge(blob* blobArray);
+{
+	int x1, x2, y1, y2;
+	for (j = 0; j < (blob::blobTotalCount); j++)
+	{
+		for (i = 0;i < (blob::blobTotalCount);i++) {
+			x1 = bloblArray[j].getPosx();
+			x2 = bloblArray[i].getPosx();
+			y1 = bloblArray[j].getPosy();
+			y2 = bloblArray[i].getPosy();
+			if (x1 == x2 && y1 == y2) {
+				do_blob_merge(blobArray,j,i);
+			}
+		}
+	}
+}
+
+
+void do_blob_merge(blob* blobArray,uint j, uint i){
+	if (blobArray[j].getblobRadius() && blobArray[i].getblobRadius()) {
+		switch (blobArray[j].getblobRadius()) {
+		case BABYRADIO:
+			grownBlob.blobBirth();
+			break;
+		case GROWNRADIO:
+			goodOldBlob.blobBirth();
+			break;
+		case OLDRADIO:
+			break;
 		}
 	}
 }

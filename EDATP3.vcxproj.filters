@@ -36,6 +36,9 @@
     <ClCompile Include="food.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="blopping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blob.h">
@@ -56,5 +59,11 @@
     <ClInclude Include="food.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="blopping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
