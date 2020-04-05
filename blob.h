@@ -57,7 +57,7 @@ public:
 	void setfoodMax(uint maxFoodCount_);
 //	void setNewMergeDirection(uint blobMergeDirection_);
 	void setMergeFlag(void);
-	void getblobStatus(uint isAliveFlag);
+	void setblobStatus(uint isAliveFlag);
 	void setRandomJiggle(uint RandomJiggle_);
 
 	//Getters

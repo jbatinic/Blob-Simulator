@@ -53,6 +53,7 @@ void blob::setPosxnext(double posxnext_) { blobPos.xnext = posxnext_; }
 void blob::setPosynext(double posynext_) { blobPos.ynext = posynext_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
+void blob::setblobStatus(uint isAliveFlag_ ) { isAliveFlag = isAliveFlag_; }
 void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
 void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
 ///void blob::setNewMergeDirection(uint blobMergeDirection_) { blobMergeDirection = ????? }
@@ -69,6 +70,7 @@ uint blob::getblobVelocity(void) { return blobVelocity; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
 uint blob::getfoodCount(void) { return foodCount; }
+uint blob::getblobStatus(void) { return isAliveFlag; }
 uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
 
@@ -109,8 +111,7 @@ void blob::moveBlob()
 	}
 }
 
-int blob::
-(blob& blob2)		//COMO REFERENCIA?
+int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
 	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobRadius * 4 * (double)blobRadius)); 
 	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4

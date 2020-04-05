@@ -60,7 +60,7 @@ void blob_smellBlob(blob* blobArray)
 					mergeTotal++;		//Con cuantos blobs se va a merge			
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
-					//DESTROY BLOB i 
+					blobArray[i].setblobStatus = 0;//DESTROY BLOB i 
 				}
 			}
 		}
@@ -77,13 +77,13 @@ void blob_smellBlob(blob* blobArray)
 			case BABYRADIO:
 				//create new grown blob
 				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
-				//DESTROY BLOB J
+				blobArray[j].setblobStatus = 0;//DESTROY BLOB J
 				break;
 
 			case GROWNRADIO:
 				//create new old blob 
 				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
-				//DESTROY BLOB J
+				blobArray[j].setblobStatus = 0;//DESTROY BLOB J
 				break;
 			default:
 				break;
