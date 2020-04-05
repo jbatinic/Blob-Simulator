@@ -39,24 +39,6 @@
     <ClCompile Include="blopping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui_files\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui_files\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui_files\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui_files\imgui_impl_allegro5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui_files\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blob.h">
@@ -80,46 +62,8 @@
     <ClInclude Include="blopping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui_files\imconfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imgui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imgui_impl_allegro5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imgui_internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imstb_rectpack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imstb_textedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui_files\imstb_truetype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="blob-sprites\babyblob.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="blob-sprites\background.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="blob-sprites\food.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="blob-sprites\goodoldblob.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="blob-sprites\grownblob.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

@@ -14,6 +14,13 @@
 #define WIDTH 60
 #define HEIGHT 50
 #define PI 3.14159265
+#define MERGE 1
+#define BLOBSALUDO 2
+#define NOTCLOSE 0
+
+#define BLOBSPEED 1.0
+#define BLOBRADIO 5
+#define BLOBMAXFOOD 5
 
 typedef struct
 {
@@ -30,8 +37,8 @@ class blob
 public:
 	//Constructores
 	blob();
-	blob(uint ancho, uint alto, uint radio_, float percentSpeed_);
-
+	blob(double posx_, double posy_, float deathProb_, double speed_, uint radio_, uint maxFoodCount_, uint RandomJiggle_);
+	
 	//static 
 	static uint blobTotalCount;
 	static uint increaseCount(void);
@@ -48,39 +55,48 @@ public:
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
 	void setfoodMax(uint maxFoodCount_);
+//	void setNewMergeDirection(uint blobMergeDirection_);
+	void setMergeFlag(void);
+	void setblobStatus(uint isAliveFlag);
+	void setRandomJiggle(uint RandomJiggle_);
 
 	//Getters
 	double getPosx(void);
 	double getPosy(void);
 	double getPosxnext(void);
 	double getPosynext(void);
-	double getPercentSpeed(void);
+	uint getblobVelocity(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
+	uint getblobStatus(void);
 	uint getfoodCount(void);
-
+	uint getRandomJiggle(void);
+	bool getMergeFlag(void);
+	
 
 	//Funciones
 	void moveBlob(void);
-	double checkRadius(blob* blob2);
+	int checkRadius(blob& blob2);
 	int checkFood(food* fruta);
 	void changeDirection(food* fruta);
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
-	
+	void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
+
 
 protected:
 	position_t blobPos;
 	uint blobDirection;
 	int blobVelocity;
 	uint blobRadius;
+	uint isAliveFlag;
 	float deathProb;
 	uint foodCount;
 	double percentSpeed;
 	uint maxFoodCount;
-
-//	uint blobGroup;
-
+	uint blobMergeDirection;
+	bool mergeFlag;
+	uint RandomJiggle; 
 };
 
 

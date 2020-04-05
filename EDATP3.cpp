@@ -1,5 +1,3 @@
-/*
-
 // EDATP3.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
@@ -12,16 +10,17 @@
 #include "food.h"
 #include <stdio.h>
 
-//tood esto lo definira user
-#define SPEED 2     
-#define VMAX 5	
-#define VMIN 1	
 #define MAXBLOBS 700
 #define MAXFRUTA 400
+#define VMIN 1
+//tood esto lo definira user ANTES DE INICIAR   
+#define SPEED 2     
+#define VMAX 5	            //DEPENDE MODO 1 O 2    
 #define FOODCOUNT 30
 #define MODO1 1 
 #define MODO2 0
 #define BLOBCOUNT 10
+#define RANDOMJIGGLE 2   //ENTRE 0 Y 360
 
 //function nose donde ponerla
 int randomVelocity(int vmax, int vmin);
@@ -40,21 +39,31 @@ int main()
     
     for (i = 0; i < BLOBCOUNT; i++)          //Este es BLOBCOUNT, blobs definidos por usuario para empezar
     {
-        //https://stackoverflow.com/questions/686353/random-float-number-generation  
-        blobArray[i].setPosx(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
-        blobArray[i].setPosy(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
-        blobArray[i].setDeathProb(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-        blobArray[i].setfoodCount(0);
-        blobArray[i].setDirection(rand()%360);
-        blobArray[i].setPercentSpeed(SPEED);
-        blobArray[i].setRadio(BABYRADIO);           //Empiezan todos BABY BLOBS
-        blobArray[i].setfoodMax(BABYMAXFOOD);
+        //Empiezan todos BABY BLOBS
+        /*      
+         blobArray[i]= blob(random_position_x,
+                            random_position_y,
+                            random_deathProb,
+                            speed,
+                            radio,
+                            max_food_count,
+                            randomjiggle);
+
+        */
+                                      //https://stackoverflow.com/questions/686353/random-float-number-generation  
+         blobArray[i]= blob((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH)))),
+                            (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT)))),
+                            (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)),
+                             SPEED,
+                             BABYRADIO,
+                             BABYMAXFOOD,
+                             RANDOMJIGGLE);
+    
     }
 
     for (i = 0; i < FOODCOUNT; i++)
     {
-        foodArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH))));
-        foodArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT))));
+        foodArray[i] = food((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / WIDTH))), (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / HEIGHT))));
     }
 
     
@@ -73,27 +82,7 @@ int main()
         }
     }
 
-   int j = 0;
-   do
-   {
-        for (i = 0; i < blob::blobTotalCount; i++)
-        {
-           printf("Blob %u - x: %f y: %f            FOOD COUNT:%u\n", i, blobArray[i].getPosx(), blobArray[i].getPosy(), blobArray[i].getfoodCount());
-           blobArray[i].moveBlob();
-        }
 
-        start_blopping(blobArray, foodArray);
-
-        for (i = 0; i < blob::blobTotalCount; i++)
-        {
-            printf("Blob %u - x: %f y: %f            FOOD COUNT:%u\n", i, blobArray[i].getPosx(), blobArray[i].getPosy(), blobArray[i].getfoodCount());
-            blobArray[i].moveBlob();
-        }
-                   
-        printf("\n");
-
-   } while (++j<40);
-    
 
 
     delete[] blobArray;
@@ -107,19 +96,3 @@ int randomVelocity(int vmax, int vmin)
 {
     return rand() % (vmax - vmin + 1) + vmin;
 }
-
-
-/*
-preguntar pq esto no funcionaria
-
-    food* foodArray = new food[MAXFRUTA];
-    double x_position;
-    double y_position;
-
-    for (i = 0; i < MAXFRUTA; i++)
-    {
-        foodArray[i].food(x_position,y_position);
-    }
-
-*/
-

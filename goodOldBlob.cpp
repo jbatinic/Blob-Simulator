@@ -11,21 +11,24 @@ goodOldBlob::goodOldBlob() {
 	maxFoodCount = 0;
 }
 
-goodOldBlob::goodOldBlob(uint ancho, uint alto, double percentSpeed_)
+goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double percentSpeed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
-	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
-	blobPos.y = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (alto)));
+	blobPos.x = posx_;
+	blobPos.y = posy_;
 	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	foodCount = 0;
 	blobRadius = OLDRADIO;
 	percentSpeed = percentSpeed_;
-	blobDirection = rand() % 360;
+	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
 }
 
+//HACE FALTA ESTA FUNCION??
+/*
 void goodOldBlob::blobBirth(goodOldBlob* blobArray)
 {
 	uint count = blob::increaseCount();
 	blobArray[count] = goodOldBlob(WIDTH, HEIGHT, blobArray[0].getPercentSpeed());
 }
+*/

@@ -10,8 +10,8 @@ class goodOldBlob :
 {
 public:
 	goodOldBlob();
-	goodOldBlob(uint ancho, uint alto,double percentSpeed_);
-	virtual void blobBirth(goodOldBlob* blob);
+	goodOldBlob(double posx_, double posy_, uint direction_, double percentSpeed_);
+//	virtual void blobBirth(goodOldBlob* blob);
 };
 
 
