@@ -9,6 +9,7 @@ grownBlob::grownBlob() {
 	percentSpeed = 0;
 	blobDirection = 0;
 	maxFoodCount = 0;
+	isAliveFlag = 0;
 }
 
 grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_)
@@ -22,6 +23,7 @@ grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_)
 	blobVelocity = Speed_;
 	blobDirection = direction_;
 	maxFoodCount = GROWNMAXFOOD;
+	isAliveFlag = ALIVE;
 }
 
 //HACE FALTA ESTA FUNCION?

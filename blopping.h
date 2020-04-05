@@ -7,6 +7,7 @@
 #include "grownBlob.h"
 #include "food.h"
 
+
 void start_blopping(blob* blopArray, food* foodArray);
 
 void blop_smellRadius(blob* blobArray, food* frutaArray);

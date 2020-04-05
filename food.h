@@ -24,6 +24,7 @@ public:
 	void setPosy_f(double foodPosy_);
 	void setfoodRadius(void);
 
+
 protected:
 	double foodPosx;
 	double foodPosy;

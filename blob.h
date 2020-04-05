@@ -18,6 +18,9 @@
 #define BLOBSALUDO 2
 #define NOTCLOSE 0
 
+#define DEAD 0 
+#define ALIVE 1
+
 #define BLOBSPEED 1.0
 #define BLOBRADIO 5
 #define BLOBMAXFOOD 5

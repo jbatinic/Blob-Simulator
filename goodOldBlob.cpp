@@ -9,6 +9,7 @@ goodOldBlob::goodOldBlob() {
 	percentSpeed = 0;
 	blobDirection = 0;
 	maxFoodCount = 0;
+	isAliveFlag = 0;
 }
 
 goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double percentSpeed_)
@@ -22,6 +23,7 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double per
 	percentSpeed = percentSpeed_;
 	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
+	isAliveFlag = ALIVE;
 }
 
 //HACE FALTA ESTA FUNCION??

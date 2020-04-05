@@ -9,6 +9,7 @@ babyBlob::babyBlob() {
 	percentSpeed = 0;
 	blobDirection = 0;
 	maxFoodCount = 0;
+	isAliveFlag = 0;
 }
 
 babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
@@ -22,6 +23,8 @@ babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
 	percentSpeed = percentSpeed_;
 	blobDirection = rand() % 360;
 	maxFoodCount = BABYMAXFOOD;
+	isAliveFlag = ALIVE;
+
 }
 
 void babyBlob::blobBirth(babyBlob* blobArray)

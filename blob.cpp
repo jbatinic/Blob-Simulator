@@ -19,7 +19,8 @@ blob::blob(void){
 	blobVelocity = 0;
 	blobMergeDirection = 0;
 	mergeFlag = false; 
-	isAliveFlag = 1;
+	isAliveFlag = 0;
+	RandomJiggle = 0;
 }
 
 blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ , uint RandomJiggle_)
@@ -34,10 +35,9 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 	mergeFlag = false;
 	foodCount = 0;
 	percentSpeed =speed_;
-
+	isAliveFlag = ALIVE;
 	blobVelocity = 0;	//La inicializo pero vamos a escribir sobre ella depsues
 	RandomJiggle = RandomJiggle_;
-
 
 }
 
@@ -56,9 +56,9 @@ void blob::setRadio(uint radio_) { blobRadius = radio_; }
 void blob::setblobStatus(uint isAliveFlag_ ) { isAliveFlag = isAliveFlag_; }
 void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
 void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
-///void blob::setNewMergeDirection(uint blobMergeDirection_) { blobMergeDirection = ????? }
 void blob::setMergeFlag(void) { mergeFlag = true; }
 void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_;  }
+
 /****************************************
 *				GETTERS		     		*
 *****************************************/

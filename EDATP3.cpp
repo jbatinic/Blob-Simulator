@@ -1,4 +1,4 @@
-
+/*
 // EDATP3.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
@@ -50,7 +50,7 @@ int main()
                             max_food_count,
                             randomjiggle);
 
-        */
+        
                                       //https://stackoverflow.com/questions/686353/random-float-number-generation  
          blobArray[i]= blob((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (WIDTH)))),
                             (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (HEIGHT)))),
@@ -97,3 +97,5 @@ int randomVelocity(int vmax, int vmin)
 {
     return rand() % (vmax - vmin + 1) + vmin;
 }
+
+*/

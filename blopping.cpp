@@ -29,7 +29,7 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 				blobArray[j].setfoodCount((blobArray[j].getfoodCount()) + 1);
 				blobArray[j].blobFeeding(blobArray);	
 				printf("\n CASE EATEN\n");
-				//frutaArray[i].byeFruta();	 DESTROY FRUTA			habria que hacer un destructor?
+				//CHANGE POSITION OF FRUTA 
 				break;
 			default:
 				break;
@@ -60,7 +60,7 @@ void blob_smellBlob(blob* blobArray)
 					mergeTotal++;		//Con cuantos blobs se va a merge			
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
-					blobArray[i].setblobStatus = 0;//DESTROY BLOB i 
+					blobArray[i].setblobStatus(DEAD);//DESTROY BLOB i 
 				}
 			}
 		}
@@ -77,13 +77,13 @@ void blob_smellBlob(blob* blobArray)
 			case BABYRADIO:
 				//create new grown blob
 				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
-				blobArray[j].setblobStatus = 0;//DESTROY BLOB J
+				blobArray[j].setblobStatus(DEAD);//DESTROY BLOB J
 				break;
 
 			case GROWNRADIO:
 				//create new old blob 
 				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
-				blobArray[j].setblobStatus = 0;//DESTROY BLOB J
+				blobArray[j].setblobStatus(DEAD);//DESTROY BLOB J
 				break;
 			default:
 				break;
