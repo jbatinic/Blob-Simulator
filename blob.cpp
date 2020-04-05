@@ -28,6 +28,8 @@ blob::blob(uint ancho, uint alto, uint radio_, float percentSpeed_)
 	blobRadius = radio_;
 	percentSpeed = percentSpeed_;
 	blobDirection = rand()%360;
+	blobMergeDirection = blobDirection; 
+	mergeFlag = false;
 }
 
 /****************************************
@@ -44,6 +46,8 @@ void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
 void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
 void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
+///void blob::setNewMergeDirection(uint blobMergeDirection_) { blobMergeDirection = ????? }
+void blob::setMergeFlag(void) { mergeFlag = true; }
 
 /****************************************
 *				GETTERS		     		*
@@ -56,7 +60,7 @@ double blob::getPercentSpeed(void) { return percentSpeed; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
 uint blob::getfoodCount(void) { return foodCount; }
-
+bool blob::getMergeFlag(void) { return mergeFlag; }
 
 /****************************************
 *			FUNCIONES					*
@@ -95,12 +99,22 @@ void blob::moveBlob()
 	}
 }
 
-double blob::checkRadius(blob* blob2)		//COMO REFERENCIA?
+int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
-	if (blobRadius == blob2->getblobRadius())			//Si tienen el mismo radio son del mismo tipo
-		return (((blobPos.x - blob2->getPosx()) * (blobPos.x - blob2->getPosx()) + (blobPos.y - blob2->getPosy()) * (blobPos.y- blob2->getPosy())) < ((double)blobRadius * 4 * (double)blobRadius )); //hacemos el cuadrado de la suma de los radios, por eso r*r*4
-	else
-		return 0;
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobRadius * 4 * (double)blobRadius)); 
+	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4
+	if (checking == 1) 
+	{
+		if (blobRadius == blob2.getblobRadius())
+		{		//Si tienen el mismo radio son del mismo tipo
+			ret_Val = MERGE;
+		}
+		else
+		{
+			ret_Val = BLOBSALUDO;
+		}
+	}
+	return ret_Val;
 }
 
 int blob::checkFood(food* fruta)		//COMO PUNTERO?
@@ -164,19 +178,15 @@ uint blob::increaseCount(void)
 	return blobTotalCount;
 }
 
-/*
-double blob::checkRadius(blob& blob1, blob& blob2)
-{
-	if (blob1.getblobRadius() == blob2.getblobRadius)			//Si tienen el mismo radio son del mismo tipo
-		return (((blob1.getPosx() - blob2.getPosx()) * (blob1.getPosx() - blob2.getPosx()) + (blob1.getPosy() - blob2.getPosy()) * (blob1.getPosx() - blob2.getPosy())) < ((blob1.getblobRadius() * 2) * (blob1.getblobRadius() * 2)));
-	else
-		return 0;
+void blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
+{ 
+	//crear un nuevo blob de tipo evolucionado
+	//direccion: suma del promedio entre los blobs obtenida en merge_new_direction
+	//posicion es misma que blob J
+	//velocidad: promedio de velocidades
+
+	blob::increaseCount();
+
 }
 
-double blob::checkFood(food& fruta, blob& blob1)
-{
-	int r = blob1.getblobRadius() + fruta.getfoodRadius();
-	return ((blob1.getPosx() - fruta.getfoodPosx) * (blob1.getPosx() - fruta.getfoodPosx) + (blob1.getPosy() - fruta.getfoodPosy) * (blob1.getPosy() - fruta.getfoodPosy)) < r * r;
-}
 
-*/

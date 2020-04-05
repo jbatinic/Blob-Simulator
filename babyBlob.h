@@ -11,6 +11,7 @@ class babyBlob :
 public:
 	babyBlob();
 	babyBlob(uint ancho, uint alto, double percentSpeed_);
+//	virtual void blobMerge(babyBlob* blobArray, uint* array_of_Directions, int mergeTotal);
 	virtual void blobBirth(babyBlob* blob);
 
 };

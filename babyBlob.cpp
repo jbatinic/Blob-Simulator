@@ -28,4 +28,13 @@ void babyBlob::blobBirth(babyBlob* blobArray)
 {
 	uint count = blob::increaseCount();
 	blobArray[count] = babyBlob(WIDTH,HEIGHT,blobArray[0].getPercentSpeed());
+
 }
+
+/*
+void babyBlob::blobMerge(babyBlob* blobArray, babyBlob* blob1, babyBlob* blob2)
+{
+
+}
+
+*/

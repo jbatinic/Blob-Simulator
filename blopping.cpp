@@ -1,10 +1,11 @@
 #include "blopping.h"
 
 
-void start_blopping(blob* blopArray, food* fruitArray_)
+void start_blopping(blob* blobArray, food* fruitArray_)
 {
-	blop_smellRadius(blopArray, fruitArray_);
-	blop_merge();
+	blop_smellRadius(blobArray, fruitArray_);		//Notese que si se superponen dos o mas blobs y fruta, 
+														//un bob la comera y luego se mergiaran o saludaran
+//	blop_smellBlob(blobArray);
 
 }
 
@@ -37,55 +38,74 @@ void blop_smellRadius(blob* blobArray, food* frutaArray)
 	}
 }
 
-void blop_merge(blob* blobArray);
+void blob_smellBlob(blob* blobArray)
 {
-	int x1, x2, y1, y2;
-	for (j = 0; j < (blob::blobTotalCount); j++)
-	{
-		for (i = 0;i < (blob::blobTotalCount);i++) {
-			x1 = bloblArray[j].getPosx();
-			x2 = bloblArray[i].getPosx();
-			y1 = bloblArray[j].getPosy();
-			y2 = bloblArray[i].getPosy();
-			if (x1 == x2 && y1 == y2) {
-				do_blob_merge(blobArray,j,i);
-			}
-		}
-	}
-}
+	uint i, j, mergeTotal;
+	uint* array_of_Directions = (uint*)malloc(sizeof(uint) * blob::blobTotalCount);  //Un array de las direcciones de los blobs con los que el Blob j se mergiara
+																							//Sera utilizado para hallar la nueva direccion promedio
+	uint* p_2_Directions = array_of_Directions;		//Con este me manejo para guardar las direcciones y el otro lo dejo como esta 
+															//para poder hacer free despues
 
+	//PREGUNTAR SI HAY FORMA MAS LINDA DE HACER ESO^
 
-void do_blob_merge(blob* blobArray,uint j, uint i){
-	if (blobArray[j].getblobRadius() && blobArray[i].getblobRadius()) {
-		switch (blobArray[j].getblobRadius()) {
-		case BABYRADIO:
-			grownBlob.blobBirth();
-			break;
-		case GROWNRADIO:
-			goodOldBlob.blobBirth();
-			break;
-		case OLDRADIO:
-			break;
-		}
-	}
-}
-
-/*
-blop_smellBlob(blob* blobArray)
-{
-	uint i, j;
-	for (j = 0; j < (blob::blobTotalCount); j++)
+	for (j = 0, mergeTotal = 0; j < (blob::blobTotalCount); j++)
 	{
 		for (i = 0; i < (blob::blobTotalCount); i++)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{
-				if (blob::checkFood(blobArray[j], blobArray[i]))		//Devuelve 1 si un blob del mismo tipo esta en el radio
-				{
-
+				if (do_blob_merge(&(blobArray[j]), blobArray[i]))		//vemos si hay merge entre el blob J y todosl os demas blobs
+				{				//Prepara todo para cuando hagamos merge con funcion blobMerge.
+					mergeTotal++;		//Con cuantos blobs se va a merge			
+					*p_2_Directions++ = blobArray[i].getblobDirection();			//Agrega nueva direccion al array y puntero queda apuntando a proximo elemento de array
+					//DESTROY BLOB i 
 				}
 			}
 		}
+		if (blobArray[j].getMergeFlag())
+		{
+			switch (blobArray[j].getblobRadius())
+			{
+			case BABYRADIO:
+				blobArray[j].blobMerge((babyBlob*)blobArray, array_of_Directions, mergeTotal);
+				//DESTROY BLOB J
+				break;
+			case GROWNRADIO:
+				blobArray[j].blobMerge((grownBlob*)blobArray, array_of_Directions, mergeTotal);
+				//DESTROY BLOB J
+				break;
+			default:
+				break;
+			}
+		}
 	}
+
+	free(array_of_Directions);
 }
-*/
+
+bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la paso por referencia?
+{
+	bool return_val = false;
+	switch (blob1->checkRadius(blob2))  //Vemos si se superponen los bitmaps
+	{
+	case MERGE:
+		if (blob1->getblobRadius != OLDRADIO)
+		{
+			blob1->setMergeFlag();
+			return_val = true;
+		}
+		else
+		{
+		//CALL TO ALLEGRO SALUDO FUNCTION
+		}
+		break;
+
+	case BLOBSALUDO:
+		//CALL TO ALLEGRO SALUDO FUNCTION
+		break;
+
+	case NOTCLOSE:
+		break;
+	}
+	return return_val;
+}

@@ -14,7 +14,9 @@
 #define WIDTH 60
 #define HEIGHT 50
 #define PI 3.14159265
-
+#define MERGE 1;
+#define BLOBSALUDO 2;
+#define NOTCLOSE 0; 
 typedef struct
 {
 	double x;
@@ -48,6 +50,8 @@ public:
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
 	void setfoodMax(uint maxFoodCount_);
+//	void setNewMergeDirection(uint blobMergeDirection_);
+	void setMergeFlag(void);
 
 	//Getters
 	double getPosx(void);
@@ -58,16 +62,17 @@ public:
 	uint getblobRadius(void);
 	uint getblobDirection(void);
 	uint getfoodCount(void);
-
+	bool getMergeFlag(void);
 
 	//Funciones
 	void moveBlob(void);
-	double checkRadius(blob* blob2);
+	int checkRadius(blob& blob2);
 	int checkFood(food* fruta);
 	void changeDirection(food* fruta);
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
-	
+	virtual void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
+
 
 protected:
 	position_t blobPos;
@@ -78,6 +83,9 @@ protected:
 	uint foodCount;
 	double percentSpeed;
 	uint maxFoodCount;
+
+	uint blobMergeDirection;
+	bool mergeFlag;
 
 //	uint blobGroup;
 
