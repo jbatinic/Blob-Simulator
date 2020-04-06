@@ -78,11 +78,9 @@ void blob::moveBlob()
 	double i;
 	double tempNextx, tempNexty;
 
-	for (i = 0.0; i < blobVelocity; i++)		//for (i = 0.0; i < (blobVelocity* percent_speed); i++)
-	{
-		tempNextx = (blobPos.x + sin(PI * (double)blobDirection / 180.0));
-		tempNexty = (blobPos.y + cos(PI * (double)blobDirection / 180.0));
-
+		tempNextx = (blobPos.x + sin(PI * ((double)blobDirection / 180.0) * blobVelocity * percentSpeed));
+		tempNexty = (blobPos.y + cos(PI * ((double)blobDirection / 180.0) * blobVelocity * percentSpeed));
+		
 		if (tempNextx < 0)
 		{
 			tempNextx += WIDTH;
@@ -103,10 +101,10 @@ void blob::moveBlob()
 			tempNexty -= HEIGHT;
 		}
 		printf("(%f,%f) -> (%f,%f)\n", blobPos.x, blobPos.y, tempNextx, tempNexty);
+		
 	
 		setPosx(tempNextx);
 		setPosy(tempNexty);
-	}
 	printf("MOVE\n");
 }
 

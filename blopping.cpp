@@ -8,10 +8,14 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb)
 	blob_smellRadius(blobArray, fruitArray_);		//Notese que si se superponen dos o mas blobs y fruta, 
 														//un bob la comera y luego se mergiaran o saludaran
 	blob_smellBlob(blobArray);
-	for (j = 0; (blob::blobTotalCount); j++)
+	for (j = 0; j<(blob::blobTotalCount); j++)
 	{
-		blobArray[j].moveBlob();
-		blobArray[j].blobDeath(user_deathProb);
+		if (blobArray[j].getblobStatus())
+		{
+			blobArray[j].moveBlob();
+			blobArray[j].blobDeath(user_deathProb);
+		}
+		
 	}
 	setNewDeathProb(blobArray);
 	

@@ -136,11 +136,16 @@ int main(int, char**)
         }
 
 
-        if (main_menu == false && start == 0)
+        if (main_menu == false)
         {
-            create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode);
-            start++;
+            if (start == 0) {
+                create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode);
+                start++;
+            }
+               start_blopping(blobArray, foodArray, mort_rate);
+               al_rest(1);
         }
+       
 
 
         // Rendering
@@ -152,10 +157,10 @@ int main(int, char**)
             0, 0, 900, 470,
             0, 0, 1280, 720, 0);
 
-        //ACÁ HAY QUE LLAMAR A LAS FUNCIONES DE ALLEGRO PARA DIBUJAR A LOS BLOBS Y LA COMIDA
+        if (!main_menu) {
+            print_al(blobArray, foodArray, MAXBLOBS, cantblobs, food_count, babyBlobSprite, grownBlobSprite, goodOldBlobSprite, foodSprite);
+        }
 
-        print_al(blobArray, foodArray, MAXBLOBS, cantblobs, food_count, babyBlobSprite, grownBlobSprite, goodOldBlobSprite, foodSprite);
-        start_blopping(blobArray, foodArray,mort_rate);         //NOTA ESTE MORT RATE TIENE Q IR CAMBIANDO CON INPUT DE USERRR
 
         ImGui_ImplAllegro5_RenderDrawData(ImGui::GetDrawData());
         al_flip_display();
@@ -260,7 +265,6 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
     {
         al_draw_bitmap(food, foodArray[i].getPosx_f(), foodArray[i].getPosy_f(), 0);
     }
-    al_flip_display();
 }
 
 
