@@ -8,14 +8,16 @@
 #include "food.h"
 
 
-void start_blopping(blob* blopArray, food* foodArray);
+void start_blopping(blob* blopArray, food* foodArray, float user_deathProb);
 
-void blop_smellRadius(blob* blobArray, food* frutaArray);
+void blob_smellRadius(blob* blobArray, food* frutaArray);
 
 void blob_smellBlob(blob* blobArray);
 
 bool do_blob_merge(blob* blob1 , blob& blob2 );		
 
 uint randomJiggle(uint newDirection_, uint randomJiggle);
+
+void setNewDeathProb(blob* blobArray);
 
 #endif //BLOPPING_H

@@ -11,8 +11,8 @@
 
 #include "food.h"
 
-#define WIDTH 60
-#define HEIGHT 50
+#define WIDTH 1280
+#define HEIGHT 720
 #define PI 3.14159265
 #define MERGE 1
 #define BLOBSALUDO 2
@@ -49,8 +49,6 @@ public:
 	//Setters
 	void setPosx(double posx_);
 	void setPosy(double posy_);
-	void setPosxnext(double posxnext_);
-	void setPosynext(double posynext_);
 	void setDirection(uint Blobdirection_);
 	void setDeathProb(float deathProb);
 	void setVelocity(int blobVelocity_);
@@ -66,8 +64,6 @@ public:
 	//Getters
 	double getPosx(void);
 	double getPosy(void);
-	double getPosxnext(void);
-	double getPosynext(void);
 	uint getblobVelocity(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
@@ -85,7 +81,7 @@ public:
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
 	void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
-
+	void blobDeath(double userDeathProb);
 
 protected:
 	position_t blobPos;
@@ -93,7 +89,7 @@ protected:
 	int blobVelocity;
 	uint blobRadius;
 	uint isAliveFlag;
-	float deathProb;
+	double deathProb;
 	uint foodCount;
 	double percentSpeed;
 	uint maxFoodCount;

@@ -8,8 +8,8 @@ uint blob::blobTotalCount = 0;
 *			CONSTRUCTORES				*
 *****************************************/
 blob::blob(void){
-	blobPos.x =0;
-	blobPos.y = 0;
+	blobPos.x =-10;
+	blobPos.y = -10;
 	deathProb = 0;
 	foodCount = 0;
 	blobRadius = 0;
@@ -49,8 +49,6 @@ void blob::setDeathProb(float deathProb_) { deathProb = deathProb_; }
 void blob::setVelocity(int blobVelocity_) { blobVelocity = blobVelocity_; }
 void blob::setPosx(double posx_) { blobPos.x = posx_; }
 void blob::setPosy(double posy_) { blobPos.y = posy_; }
-void blob::setPosxnext(double posxnext_) { blobPos.xnext = posxnext_; }
-void blob::setPosynext(double posynext_) { blobPos.ynext = posynext_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
 void blob::setblobStatus(uint isAliveFlag_ ) { isAliveFlag = isAliveFlag_; }
@@ -64,8 +62,6 @@ void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_;  
 *****************************************/
 double blob::getPosx(void) { return blobPos.x; }
 double blob::getPosy(void) { return blobPos.y; }
-double blob::getPosxnext(void) { return blobPos.xnext; }
-double blob::getPosynext(void) { return blobPos.ynext; }
 uint blob::getblobVelocity(void) { return blobVelocity; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
@@ -79,10 +75,10 @@ bool blob::getMergeFlag(void) { return mergeFlag; }
 *****************************************/
 void blob::moveBlob()
 {
-	int i;
-	double tempNextx = 0, tempNexty = 0;
+	double i;
+	double tempNextx, tempNexty;
 
-	for (i = 0; i < blobVelocity; i++)
+	for (i = 0.0; i < blobVelocity; i++)		//for (i = 0.0; i < (blobVelocity* percent_speed); i++)
 	{
 		tempNextx = (blobPos.x + sin(PI * (double)blobDirection / 180.0));
 		tempNexty = (blobPos.y + cos(PI * (double)blobDirection / 180.0));
@@ -106,8 +102,19 @@ void blob::moveBlob()
 		{
 			tempNexty -= HEIGHT;
 		}
-	setPosx(tempNextx);
-	setPosy(tempNexty);
+		printf("(%f,%f) -> (%f,%f)\n", blobPos.x, blobPos.y, tempNextx, tempNexty);
+	
+		setPosx(tempNextx);
+		setPosy(tempNexty);
+	}
+	printf("MOVE\n");
+}
+
+void blob::blobDeath(double user_deathProb)
+{
+	if (deathProb < user_deathProb)
+	{
+		isAliveFlag = DEAD;
 	}
 }
 
