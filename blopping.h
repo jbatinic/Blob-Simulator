@@ -8,7 +8,7 @@
 #include "food.h"
 
 
-void start_blopping(blob* blopArray, food* foodArray, float user_deathProb);
+void start_blopping(blob* blopArray, food* foodArray, float user_deathProb, float v_max, int simulation_mode);
 
 void blob_smellRadius(blob* blobArray, food* frutaArray);
 

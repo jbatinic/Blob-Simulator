@@ -51,7 +51,7 @@ public:
 	void setPosy(double posy_);
 	void setDirection(uint Blobdirection_);
 	void setDeathProb(float deathProb);
-	void setVelocity(int blobVelocity_);
+	void setVelocity(double blobVelocity_);
 	void setfoodCount(uint foodCount_);
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
@@ -86,7 +86,7 @@ public:
 protected:
 	position_t blobPos;
 	uint blobDirection;
-	int blobVelocity;
+	double blobVelocity;
 	uint blobRadius;
 	uint isAliveFlag;
 	double deathProb;

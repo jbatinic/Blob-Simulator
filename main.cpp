@@ -13,7 +13,6 @@
 #define MAXBLOBS 700
 #define MAXFRUTA 400
 #define VMIN 1.0
-#define VMAX 5.0
 #define MODO1 1
 #define MODO2 2
 
@@ -23,9 +22,9 @@ int randomVelocity(int vmax, int vmin);
 using namespace std;
 
 
-void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, double* max_velocity, int* rel_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate);
+void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* rel_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate);
 void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, uint foodCount, ALLEGRO_BITMAP* baby, ALLEGRO_BITMAP* grown, ALLEGRO_BITMAP* old, ALLEGRO_BITMAP* food);
-void create_world(blob* blobArray, food* foodArray, int food_count, int cantblobs, int mort_rate, int relative_velocity, int smell_radius, int random_j_l, int simulation_mode);
+void create_world(blob* blobArray, food* foodArray, int food_count, int cantblobs, int mort_rate, int relative_velocity, int smell_radius, int random_j_l, int simulation_mode, float vmax);
 
 int main(int, char**)
 {
@@ -39,6 +38,7 @@ int main(int, char**)
     al_init_primitives_addon();
     al_set_new_display_flags(ALLEGRO_RESIZABLE);
     ALLEGRO_DISPLAY* display = al_create_display(1280, 720);
+    ALLEGRO_TIMER* timer = al_create_timer(1 / 30.0);
     ALLEGRO_BITMAP* background = al_load_bitmap("./blob-sprites/background.jpg");
     if (background == NULL) {
         std::cout << "Couldn't load background image!" << std::endl;
@@ -49,6 +49,7 @@ int main(int, char**)
     al_register_event_source(queue, al_get_display_event_source(display));
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
+    al_register_event_source(queue, al_get_timer_event_source(timer));
 
     ALLEGRO_BITMAP* babyBlobSprite = al_load_bitmap("./blob-sprites/babyblob.png");
     if (babyBlobSprite == NULL) {
@@ -84,6 +85,7 @@ int main(int, char**)
 
     // Setup Platform/Renderer bindings
     ImGui_ImplAllegro5_Init(display);
+ 
 
     bool show_demo_window = true;
     bool show_another_window = false;
@@ -98,8 +100,7 @@ int main(int, char**)
     int cantblobs = 1;
     int food_count = 1;
     int simulation_mode = 1;
-    double max_velocity = 15.0;
- //   double relative_velocity = 1.0;
+    float max_velocity = 15.0;
     int relative_velocity = 1;
     int smell_radius = 100;
     int random_j_l = 1;
@@ -109,6 +110,7 @@ int main(int, char**)
     //Arreglos de comidas y blobs
     food* foodArray = new food[MAXFRUTA];
     blob* blobArray = new babyBlob[MAXBLOBS];
+    al_start_timer(timer);
 
     while (running)
     {
@@ -124,6 +126,16 @@ int main(int, char**)
                 al_acknowledge_resize(display);
                 ImGui_ImplAllegro5_CreateDeviceObjects();
             }
+            if (ev.type == ALLEGRO_EVENT_TIMER) {
+                if (main_menu == false)
+                {
+                    if (start == 0) {
+                        create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode, max_velocity);
+                        start++;
+                    }
+                    start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode);
+                }
+            }
         }
 
         // Start the Dear ImGui frame
@@ -133,17 +145,6 @@ int main(int, char**)
         {
             print_gui(&main_menu, &cantblobs, &food_count, &simulation_mode, &max_velocity, &relative_velocity, &smell_radius, &random_j_l, &mort_rate);
             //ImGui::ShowDemoWindow(&show_demo_window);
-        }
-
-
-        if (main_menu == false)
-        {
-            if (start == 0) {
-                create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode);
-                start++;
-            }
-               start_blopping(blobArray, foodArray, mort_rate);
-               al_rest(1);
         }
        
 
@@ -160,9 +161,11 @@ int main(int, char**)
         if (!main_menu) {
             print_al(blobArray, foodArray, MAXBLOBS, cantblobs, food_count, babyBlobSprite, grownBlobSprite, goodOldBlobSprite, foodSprite);
         }
+        printf("%f \n" , max_velocity);
 
 
         ImGui_ImplAllegro5_RenderDrawData(ImGui::GetDrawData());
+
         al_flip_display();
     }
 
@@ -175,6 +178,7 @@ int main(int, char**)
     al_destroy_bitmap(grownBlobSprite);
     al_destroy_bitmap(goodOldBlobSprite);
     al_destroy_bitmap(foodSprite);
+    al_destroy_timer(timer);
 
 
     return 0;
@@ -182,7 +186,7 @@ int main(int, char**)
 
 
 
-void create_world(blob* blobArray, food* foodArray, int food_count, int cantblobs, int mort_rate, int relative_velocity, int smell_radius, int random_j_l, int simulation_mode)
+void create_world(blob* blobArray, food* foodArray, int food_count, int cantblobs, int mort_rate, int relative_velocity, int smell_radius, int random_j_l, int simulation_mode, float v_max)
 {
 
     food::foodTotalCount = food_count;
@@ -221,17 +225,16 @@ void create_world(blob* blobArray, food* foodArray, int food_count, int cantblob
     {
         for (i = 0; i < MAXBLOBS; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
         {
-            blobArray[i].setVelocity(VMAX);
+            blobArray[i].setVelocity(v_max);
         }
     }
     else if (simulation_mode == MODO2)
     {
         for (i = 0; i < MAXBLOBS; i++)
         {
-            blobArray[i].setVelocity(randomVelocity(VMAX, VMIN));
+            blobArray[i].setVelocity(randomVelocity(v_max, VMIN));
         }
     }
-    al_flip_display();
 }
 
 void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, uint foodCount, ALLEGRO_BITMAP* baby, ALLEGRO_BITMAP* grown, ALLEGRO_BITMAP* old, ALLEGRO_BITMAP* food)
@@ -268,7 +271,7 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
 }
 
 
-void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, double* max_velocity, int* relative_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate) {
+void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* relative_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate) {
 
     ImGuiWindowFlags window_flags = 0;
     if (*main_menu) {
@@ -400,7 +403,8 @@ void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation
     if (*simulation_mode == 1) {
         ImGui::Dummy(ImVec2(0.0f, 10.0f));
         ImGui::TextWrapped("Velocidad maxima:");
-        ImGui::InputFloat("input float", (float*)max_velocity, 0.01f, 1.0f, "%.3f");
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.93f);
+        ImGui::SliderFloat("          ", max_velocity, 0.01f, 20.0f, "%.2f");
     }
 
     if (*main_menu) {

@@ -46,7 +46,7 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 *****************************************/
 void blob::setDirection(uint blobDirection_){blobDirection = blobDirection_;}
 void blob::setDeathProb(float deathProb_) { deathProb = deathProb_; }
-void blob::setVelocity(int blobVelocity_) { blobVelocity = blobVelocity_; }
+void blob::setVelocity(double blobVelocity_) { blobVelocity = blobVelocity_; }
 void blob::setPosx(double posx_) { blobPos.x = posx_; }
 void blob::setPosy(double posy_) { blobPos.y = posy_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
@@ -77,9 +77,10 @@ void blob::moveBlob()
 {
 	double i;
 	double tempNextx, tempNexty;
-
-		tempNextx = (blobPos.x + sin(PI * ((double)blobDirection / 180.0) * blobVelocity * percentSpeed));
-		tempNexty = (blobPos.y + cos(PI * ((double)blobDirection / 180.0) * blobVelocity * percentSpeed));
+		
+		//intf("%f \n", blobVelocity);
+		tempNextx = (blobPos.x + sin(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
+		tempNexty = (blobPos.y + cos(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
 		
 		if (tempNextx < 0)
 		{
@@ -105,7 +106,6 @@ void blob::moveBlob()
 	
 		setPosx(tempNextx);
 		setPosy(tempNexty);
-	printf("MOVE\n");
 }
 
 void blob::blobDeath(double user_deathProb)

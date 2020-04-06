@@ -1,20 +1,35 @@
 #include "blopping.h"
 
 
-void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb)
+void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, float v_max, int simulation_mode)
 {
-	int j;
+	int j, i;
 
 	blob_smellRadius(blobArray, fruitArray_);		//Notese que si se superponen dos o mas blobs y fruta, 
 														//un bob la comera y luego se mergiaran o saludaran
 	blob_smellBlob(blobArray);
+	if (simulation_mode == 1)
+	{
+		for (i = 0; i < 700; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
+		{
+			blobArray[i].setVelocity(v_max);
+		}
+	}
+	/*else if (simulation_mode == 2)
+	{
+		for (i = 0; i < 700; i++)
+		{
+			blobArray[i].setVelocity(randomVelocity(v_max, VMIN));
+		}
+	}*/
 	for (j = 0; j<(blob::blobTotalCount); j++)
 	{
 		if (blobArray[j].getblobStatus())
 		{
 			blobArray[j].moveBlob();
-			blobArray[j].blobDeath(user_deathProb);
+			//blobArray[j].blobDeath(user_deathProb);
 		}
+
 		
 	}
 	setNewDeathProb(blobArray);
