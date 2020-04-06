@@ -15,13 +15,6 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 			blobArray[i].setVelocity(v_max);
 		}
 	}
-	/*else if (simulation_mode == 2)
-	{
-		for (i = 0; i < 700; i++)
-		{
-			blobArray[i].setVelocity(randomVelocity(v_max, VMIN));
-		}
-	}*/
 	for (j = 0; j<(blob::blobTotalCount); j++)
 	{
 		if (blobArray[j].getblobStatus())
