@@ -7,8 +7,8 @@ uint blob::blobTotalCount = 0;
 /****************************************
 *			CONSTRUCTORES				*
 *****************************************/
-blob::blob(void){
-	blobPos.x =-10;
+blob::blob(void) {
+	blobPos.x = -10;
 	blobPos.y = -10;
 	deathProb = 0;
 	foodCount = 0;
@@ -18,12 +18,12 @@ blob::blob(void){
 	blobDirection = 0;
 	blobVelocity = 0;
 	blobMergeDirection = 0;
-	mergeFlag = false; 
+	mergeFlag = false;
 	isAliveFlag = 0;
 	RandomJiggle = 0;
 }
 
-blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint radio_, uint maxFoodCount_ , uint RandomJiggle_)
+blob::blob(double posx_, double posy_, float deathProb_, double speed_, uint radio_, uint maxFoodCount_, uint RandomJiggle_)
 {
 	blobPos.x = posx_;
 	blobPos.y = posy_;
@@ -31,11 +31,11 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 	deathProb = deathProb_;
 	blobRadius = radio_;
 	maxFoodCount = maxFoodCount_;
-	blobDirection = rand()%360;
-	blobMergeDirection = blobDirection; 
+	blobDirection = rand() % 360;
+	blobMergeDirection = blobDirection;
 	mergeFlag = false;
 	foodCount = 0;
-	percentSpeed =speed_;
+	percentSpeed = speed_;
 	isAliveFlag = ALIVE;
 	blobVelocity = 0;	//La inicializo pero vamos a escribir sobre ella depsues
 	RandomJiggle = RandomJiggle_;
@@ -45,18 +45,17 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 /****************************************
 *			SETTERS		         		*
 *****************************************/
-void blob::setDirection(uint blobDirection_){blobDirection = blobDirection_;}
+void blob::setDirection(uint blobDirection_) { blobDirection = blobDirection_; }
 void blob::setDeathProb(float deathProb_) { deathProb = deathProb_; }
 void blob::setVelocity(double blobVelocity_) { blobVelocity = blobVelocity_; }
 void blob::setPosx(double posx_) { blobPos.x = posx_; }
 void blob::setPosy(double posy_) { blobPos.y = posy_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
-void blob::setblobStatus(uint isAliveFlag_ ) { isAliveFlag = isAliveFlag_; }
+void blob::setblobStatus(uint isAliveFlag_) { isAliveFlag = isAliveFlag_; }
 void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
-void blob::setfoodMax(uint maxFoodCount_) { maxFoodCount = maxFoodCount_; }
 void blob::setMergeFlag(void) { mergeFlag = true; }
-void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_;  }
+void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_; }
 
 /****************************************
 *				GETTERS		     		*
@@ -71,6 +70,8 @@ uint blob::getblobStatus(void) { return isAliveFlag; }
 uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
 uint blob::getbitmapSize(void) { return bitmapSize; }
+uint blob::getMaxfoodCount(void) { return maxFoodCount; }
+float blob::getpercentSpeed(void) { return percentSpeed; }
 
 /****************************************
 *			FUNCIONES					*
@@ -79,54 +80,57 @@ void blob::moveBlob()
 {
 	double i;
 	double tempNextx, tempNexty;
-		
-		//intf("%f \n", blobVelocity);
-		tempNextx = (blobPos.x + cos(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
-		tempNexty = (blobPos.y + sin(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
 
-		if (tempNextx < 0)
-		{
-			tempNextx += WIDTH;
-		}
+	//intf("%f \n", blobVelocity);
+	tempNextx = (blobPos.x + cos(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
+	tempNexty = (blobPos.y + sin(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
 
-		if (tempNextx > WIDTH)
-		{
-			tempNextx -= WIDTH;
-		}
+	if (tempNextx < 0)
+	{
+		tempNextx += WIDTH;
+	}
 
-		if (tempNexty < 0)
-		{
-			tempNexty += HEIGHT;
-		}
+	if (tempNextx > WIDTH)
+	{
+		tempNextx -= WIDTH;
+	}
 
-		if (tempNexty > HEIGHT)
-		{
-			tempNexty -= HEIGHT;
-		}
+	if (tempNexty < 0)
+	{
+		tempNexty += HEIGHT;
+	}
 
-		setPosx(tempNextx);
-		setPosy(tempNexty);
+	if (tempNexty > HEIGHT)
+	{
+		tempNexty -= HEIGHT;
+	}
+
+	setPosx(tempNextx);
+	setPosy(tempNexty);
 }
 
 void blob::blobDeath(float user_deathProb)
 {
-	if (deathProb < user_deathProb)
+	if ((rand() % 100) / 100.0 < user_deathProb)
 	{
-		isAliveFlag = DEAD;
+		printf("dead\n");
+	}
+	else
+	{
+		printf("not\n");
 	}
 }
 
 int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
-	int blobsRadius = bitmapSize + blob2.getbitmapSize(); 
+	int blobsRadius = bitmapSize + blob2.getbitmapSize();
 
-	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)(blobsRadius*blobsRadius))); 
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobsRadius * (double)blobsRadius));
 	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4
-	if (checking == 1) 
+	if (checking == 1)
 	{
 		if (blobRadius == blob2.getblobRadius())
 		{		//Si tienen el mismo radio son del mismo tipo
-			printf("MERGE\n");
 			ret_Val = MERGE;
 		}
 		else
@@ -140,9 +144,9 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 int blob::checkFood(food* fruta)		//COMO PUNTERO?
 {
 	int r = blobRadius + fruta->getfoodRadius();
-	int result =0; 
+	int result = 0;
 
-	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < ((double)r* (double)r*0.15))
+	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < ((double)r * (double)r * 0.15))
 	{//Estan casi superpuestos
 		result = 2; //case2 SE LO COME
 	}
@@ -162,23 +166,15 @@ void blob::changeDirection(food* fruta)
 	double change_y = blobPos.y - fruta->getPosy_f();
 
 
-	newDirection = atan2(change_y , change_x);	
+	newDirection = atan2(change_y, change_x);
 
-	newDirection = ( (newDirection * (float)180 ) / PI );
+	newDirection = ((newDirection * (float)180) / PI);
 
 	newDirection += 180;
-	
+
 	setDirection(newDirection);
 }
-void blob::blobFeeding(blob* blobArray)
-{
-	if(foodCount >= maxFoodCount)
-	{
-		blobBirth(blobArray);	
-		foodCount = 0;
-	}
 
-}
 
 void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 
 												//cparametros seran blob* y tipo_de_blob&
@@ -191,10 +187,10 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 		BLOBSPEED,
 		BLOBRADIO,
 		BLOBMAXFOOD,
-		rand()%360);
+		rand() % 360);
 }
 
-uint blob::increaseCount(void){return ++blobTotalCount; }
+uint blob::increaseCount(void) { return ++blobTotalCount; }
 
 
 

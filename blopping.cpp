@@ -1,7 +1,7 @@
 #include "blopping.h"
 
 
-void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, float v_max, int simulation_mode)
+void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, float v_max, int simulation_mode, int smell_Radius)
 {
 	int j, i;
 
@@ -24,8 +24,7 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 			blobArray[j].blobDeath(user_deathProb);
 		}
 		
-	}	
-	setNewDeathProb(blobArray);
+	}
 }
 
 /**************************************************************
@@ -34,28 +33,27 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 
 void blob_smellRadius(blob* blobArray, food* frutaArray)
 {
-	uint i, j;
-	for (j = 0; j < (blob::blobTotalCount); j++)
+	uint i, j, blobCount;
+	blobCount = blob::blobTotalCount;
+	for (j = 0; j < blobCount; j++)
 	{
 		for (i = 0; i < (frutaArray[i].getfoodTotal()); i++)
 		{
-			
+
 			switch ((blobArray[j].checkFood(&(frutaArray[i]))))
 			{
 			case 1:
 
 				blobArray[j].changeDirection(&(frutaArray[i]));
-				
+
 				break;
 			case 2:
 				blobArray[j].setfoodCount((blobArray[j].getfoodCount()) + 1);
-				blobArray[j].blobFeeding(blobArray);	
-				//ACA TAMBIEN PODRIAMOS HACER OTRA COSA PARA CONSEGUIR
-				//CON EL NUMER ORANDOM PERO AHORA ME DA PAJA QUIERO VERLO FUNCIONAR ANTES
+				blobbingFeeding(blobArray, j);
 
 				//cambiamos el lugar de la fruta recien comida por uno random entre la posicion x e y de donde acaba de ser comida
-				frutaArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[j].getPosx())));
-				frutaArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[j].getPosy())));
+				frutaArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[rand() % blobCount].getPosx())));
+				frutaArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[rand() % blobCount].getPosy())));
 				break;
 			default:
 				break;
@@ -64,10 +62,21 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 	}
 }
 
+void blobbingFeeding(blob* blobArray, uint j)
+{
+	if ((blobArray[j].getfoodCount()) >= (blobArray[j].getMaxfoodCount()))
+	{
+		blob::increaseCount();
+		blobArray[blob::blobTotalCount].blobBirth((babyBlob*)blobArray);			
+		blobArray[j].setfoodCount(0);
+	}
+
+}
+
 void blob_smellBlob(blob* blobArray)
 {
 	uint i, j, mergeTotal,newMergeDirection, newMergeVelocity;
-	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
+	//printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
 	uint countTemp = blob::blobTotalCount;
 	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
 	{
@@ -92,7 +101,7 @@ void blob_smellBlob(blob* blobArray)
 			newMergeVelocity += blobArray[j].getblobVelocity();
 
 			newMergeDirection = randomJiggle(newMergeDirection, blobArray[j].getRandomJiggle());
-			printf("ESTA NACIENDO ALGO\n");
+
 			switch (blobArray[j].getblobRadius())
 			{
 			case BABYRADIO:
@@ -111,7 +120,10 @@ void blob_smellBlob(blob* blobArray)
 			}
 		}
 		else
-			printf("no merge \n");
+		{ 
+			//printf("no merge \n");
+		}
+			
 	}
 }
 
@@ -123,7 +135,7 @@ uint randomJiggle(uint newDirection_, uint randomJiggle)
 	return newDirection;
 }
 
-bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la paso por referencia?
+bool do_blob_merge(blob* blob1, blob& blob2)		
 {
 	bool return_val = false;
 	switch (blob1->checkRadius(blob2))  //Vemos si se superponen los bitmaps
@@ -131,7 +143,6 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	case MERGE:
 		if (blob1->getblobRadius() != OLDRADIO)
 		{
-			printf("merge\n");
 			blob1->setMergeFlag();
 			return_val = true;
 		}
@@ -151,26 +162,3 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	return return_val;
 }
 
-void setNewDeathProb(blob* blobArray)
-{
-	float babyProb, grownProb, oldProb;
-	babyProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	grownProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	oldProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	int i;
-	for (i = 0; i < blob::blobTotalCount ; i++)
-	{
-		switch (blobArray[i].getblobRadius())
-		{
-		case BABYRADIO:
-			blobArray[i].setDeathProb(babyProb);
-			break;
-		case GROWNRADIO:
-			blobArray[i].setDeathProb(grownProb);
-			break;
-		case OLDRADIO:
-			blobArray[i].setDeathProb(oldProb);
-			break;
-		}
-	}
-}

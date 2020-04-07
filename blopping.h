@@ -18,6 +18,6 @@ bool do_blob_merge(blob* blob1 , blob& blob2 );
 
 uint randomJiggle(uint newDirection_, uint randomJiggle);
 
-void setNewDeathProb(blob* blobArray);
+void blobbingFeeding(blob* blobArray, uint blob);
 
 #endif //BLOPPING_H

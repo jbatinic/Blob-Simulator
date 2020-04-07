@@ -25,8 +25,8 @@
 #define GOING 3
 
 #define BLOBSPEED 1.0
-#define BLOBRADIO 5
-#define BLOBMAXFOOD 5
+#define BLOBRADIO 4
+#define BLOBMAXFOOD 3
 
 typedef struct
 {
@@ -58,7 +58,7 @@ public:
 	void setfoodCount(uint foodCount_);
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
-	void setfoodMax(uint maxFoodCount_);
+//	void setMaxfoodCount(uint maxFoodCount_);
 //	void setNewMergeDirection(uint blobMergeDirection_);
 	void setMergeFlag(void);
 	void setblobStatus(uint isAliveFlag);
@@ -76,13 +76,14 @@ public:
 	bool getMergeFlag(void);
 	uint getbitmapSize(void);
 	uint getMaxfoodCount(void);
+	float getpercentSpeed(void);
 
 	//Funciones
 	void moveBlob(void);
 	int checkRadius(blob& blob2);
 	int checkFood(food* fruta);
 	void changeDirection(food* fruta);
-	void blobFeeding(blob* blobArray);
+	//void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
 	void blobDeath(float userDeathProb);
 
