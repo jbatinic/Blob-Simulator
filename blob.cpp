@@ -130,17 +130,17 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 	int ret_Val = NOTCLOSE;																											
 	if (checking == 1)
 	{
-		printf("se tocaron");
-		/*
-		if (maxFoodCount == blob2.getMaxfoodCount())
+		//printf("se tocaron");
+		
+		if (maxFoodCount == blob2.getMaxfoodCount() && (blobPos.x> 50) && (blobPos.x< (WIDTH-50)))
 		{		//Si tienen el mismo radio son del mismo tipo
-			ret_Val = MERGE;
-			printf("merge\n");
+			ret_Val = MERGE;		
 		}
 		else
 		{
 			ret_Val = BLOBSALUDO;
-		}*/
+		}
+		
 	}
 	return ret_Val;
 }

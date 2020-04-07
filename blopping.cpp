@@ -74,11 +74,11 @@ void blobbingFeeding(blob* blobArray, uint j)
 void blob_smellBlob(blob* blobArray)
 {
 	uint i, j, mergeTotal,newMergeDirection, newMergeVelocity;
-	//printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
+	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
 	uint countTemp = blob::blobTotalCount;
 	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
 	{
-		for (i = countTemp ; i > 0 ; i--)
+		for (i = countTemp; i > 0; i--)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{
@@ -87,30 +87,31 @@ void blob_smellBlob(blob* blobArray)
 					mergeTotal++;
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
-					blobArray[i].setblobStatus(DEAD);//matamos a blob i 
+					//blobArray[i].setblobStatus(DEAD);//matamos a blob i 
 				}
 			}
 		}
 
 		if ((blobArray[j].getblobStatus() == ALIVE) && (blobArray[j].getMergeFlag() == true))
 		{
-			//blobArray[j].increaseCount();
 			newMergeDirection += blobArray[j].getblobDirection();
 			newMergeVelocity += blobArray[j].getblobVelocity();
 
 			newMergeDirection = randomJiggle(newMergeDirection, blobArray[j].getRandomJiggle());
 
-			switch (blobArray[j].getblobRadius())
+			switch (blobArray[j].getMaxfoodCount())
 			{
-			case BABYRADIO:
+			case 3:
 				//create new grown blob
-				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
+				printf("newGrown\n");
+				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//Matamos a blob J
 				break;
 				
-			case GROWNRADIO:
+			case 4:
 				//create new old blob 
-				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
+				printf("newOld\n");
+				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//matamos a blob J
 				break;
 			default:
@@ -136,13 +137,15 @@ uint randomJiggle(uint newDirection_, uint randomJiggle)
 bool do_blob_merge(blob* blob1, blob& blob2)		
 {
 	bool return_val = false;
-	switch (blob1->checkRadius(blob2))  //Vemos si se superponen los bitmaps
+	int radiusResult = blob1->checkRadius(blob2);
+	switch (radiusResult)  //Vemos si se superponen los bitmaps
 	{ 
 	case MERGE:
 		if (blob1->getblobRadius() != OLDRADIO)
 		{
 			blob1->setMergeFlag();
 			return_val = true;
+			printf("merge\n");
 		}
 		else
 		{
