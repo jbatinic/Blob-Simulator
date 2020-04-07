@@ -11,7 +11,6 @@ babyBlob::babyBlob() {
 	maxFoodCount = 0;
 	isAliveFlag = 0;
 	bitmapSize = 0;
-
 }
 
 babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
