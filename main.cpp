@@ -178,6 +178,8 @@ int main(int, char**)
     al_destroy_bitmap(foodSprite);
     al_destroy_timer(timer);
 
+    delete[] foodArray;
+    delete[] blobArray;
 
     return 0;
 }
