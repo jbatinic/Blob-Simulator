@@ -73,7 +73,8 @@ void blobbingFeeding(blob* blobArray, uint j)
 
 void blob_smellBlob(blob* blobArray)
 {
-	uint i, j, mergeTotal,newMergeDirection, newMergeVelocity;
+	uint i, j, mergeTotal, newMergeDirection;
+	double newMergeVelocity;
 	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
 	uint countTemp = blob::blobTotalCount;
 	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
@@ -104,14 +105,14 @@ void blob_smellBlob(blob* blobArray)
 			case 3:
 				//create new grown blob
 				printf("newGrown\n");
-				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
+				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / (double)mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//Matamos a blob J
 				break;
 				
 			case 4:
 				//create new old blob 
 				printf("newOld\n");
-				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
+				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / (double) mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//matamos a blob J
 				break;
 			default:
