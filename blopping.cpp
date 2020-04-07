@@ -13,6 +13,7 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 		for (i = 0; i < 700; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
 		{
 			blobArray[i].setVelocity(v_max);
+			blobArray[i].setRadio(smell_Radius);
 		}
 	}
 
@@ -66,11 +67,9 @@ void blobbingFeeding(blob* blobArray, uint j)
 {
 	if ((blobArray[j].getfoodCount()) >= (blobArray[j].getMaxfoodCount()))
 	{
-		blob::increaseCount();
-		blobArray[blob::blobTotalCount].blobBirth((babyBlob*)blobArray);			
+		blobArray[j].blobBirth(blobArray);				//No llamo a sobrecargada llamo a la de blob			
 		blobArray[j].setfoodCount(0);
 	}
-
 }
 
 void blob_smellBlob(blob* blobArray)

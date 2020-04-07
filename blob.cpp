@@ -112,7 +112,7 @@ void blob::moveBlob()
 void blob::blobDeath(float user_deathProb)
 {
 	if ((rand() % 100) / 100.0 < user_deathProb)
-	{
+	{		
 		printf("dead\n");
 	}
 	else
