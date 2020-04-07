@@ -1,7 +1,7 @@
 #include "blopping.h"
 
 
-void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, float v_max, int simulation_mode)
+void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, float v_max, int simulation_mode, int smell_radius)
 {
 	int j, i;
 
@@ -13,6 +13,7 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 		for (i = 0; i < 700; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
 		{
 			blobArray[i].setVelocity(v_max);
+			blobArray[i].setRadio(smell_radius);
 		}
 	}
 	for (j = 0; j<(blob::blobTotalCount); j++)

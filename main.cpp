@@ -133,7 +133,7 @@ int main(int, char**)
                         create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode, max_velocity);
                         start++;
                     }
-                    start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode);
+                    start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode, smell_radius);
                 }
             }
         }
