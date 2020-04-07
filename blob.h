@@ -57,7 +57,7 @@ public:
 	void setVelocity(double blobVelocity_);
 	void setfoodCount(uint foodCount_);
 	void setRadio(uint radio_);
-	void setPercentSpeed(float percentSpeed_);
+	void setPercentSpeed(double percentSpeed_);
 	void setMergeFlag(void);
 	void setblobStatus(uint isAliveFlag);
 	void setRandomJiggle(uint RandomJiggle_);
@@ -72,9 +72,8 @@ public:
 	uint getfoodCount(void);
 	uint getRandomJiggle(void);
 	bool getMergeFlag(void);
-	uint getbitmapSize(void);
 	uint getMaxfoodCount(void);
-	float getpercentSpeed(void);
+	double getpercentSpeed(void);
 
 	//Funciones
 	void moveBlob(void);

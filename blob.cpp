@@ -53,7 +53,7 @@ void blob::setPosy(double posy_) { blobPos.y = posy_; }
 void blob::setfoodCount(uint foodCount_) { foodCount = foodCount_; }
 void blob::setRadio(uint radio_) { blobRadius = radio_; }
 void blob::setblobStatus(uint isAliveFlag_) { isAliveFlag = isAliveFlag_; }
-void blob::setPercentSpeed(float percentSpeed_) { percentSpeed = percentSpeed_; }
+void blob::setPercentSpeed(double percentSpeed_) { percentSpeed = percentSpeed_; }
 void blob::setMergeFlag(void) { mergeFlag = true; }
 void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_; }
 
@@ -70,14 +70,13 @@ uint blob::getblobStatus(void) { return isAliveFlag; }
 uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
 uint blob::getMaxfoodCount(void) { return maxFoodCount; }
-float blob::getpercentSpeed(void) { return percentSpeed; }
+double blob::getpercentSpeed(void) { return percentSpeed; }
 
 /****************************************
 *			FUNCIONES					*
 *****************************************/
 void blob::moveBlob()
 {
-	double i;
 	double tempNextx, tempNexty;
 
 	//intf("%f \n", blobVelocity);
