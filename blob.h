@@ -97,7 +97,6 @@ protected:
 	uint blobMergeDirection;
 	bool mergeFlag;
 	uint RandomJiggle; 
-	uint bitmapSize;
 };
 
 

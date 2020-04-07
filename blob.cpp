@@ -69,7 +69,6 @@ uint blob::getfoodCount(void) { return foodCount; }
 uint blob::getblobStatus(void) { return isAliveFlag; }
 uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
-uint blob::getbitmapSize(void) { return bitmapSize; }
 uint blob::getMaxfoodCount(void) { return maxFoodCount; }
 float blob::getpercentSpeed(void) { return percentSpeed; }
 

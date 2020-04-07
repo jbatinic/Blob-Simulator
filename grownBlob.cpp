@@ -10,7 +10,6 @@ grownBlob::grownBlob() {
 	blobDirection = 0;
 	maxFoodCount = 0;
 	isAliveFlag = 0;
-	bitmapSize = 0;
 }
 
 grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_, double percent_speed)
@@ -25,7 +24,6 @@ grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_,
 	blobDirection = direction_;
 	maxFoodCount = GROWNMAXFOOD;
 	isAliveFlag = ALIVE;
-	bitmapSize = 22;
 	percentSpeed = percent_speed;
 
 }

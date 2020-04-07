@@ -10,7 +10,6 @@ goodOldBlob::goodOldBlob() {
 	blobDirection = 0;
 	maxFoodCount = 0;
 	isAliveFlag = 0;
-	bitmapSize = 0;
 }
 
 goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Speed_, double percent_speed)
@@ -25,15 +24,6 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Spe
 	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
 	isAliveFlag = ALIVE;
-	bitmapSize = 40;
 	percentSpeed = percent_speed;
 }
 
-//HACE FALTA ESTA FUNCION??
-/*
-void goodOldBlob::blobBirth(goodOldBlob* blobArray)
-{
-	uint count = blob::increaseCount();
-	blobArray[count] = goodOldBlob(WIDTH, HEIGHT, blobArray[0].getPercentSpeed());
-}
-*/

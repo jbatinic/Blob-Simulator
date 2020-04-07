@@ -10,7 +10,6 @@ babyBlob::babyBlob() {
 	blobDirection = 0;
 	maxFoodCount = 0;
 	isAliveFlag = 0;
-	bitmapSize = 0;
 }
 
 babyBlob::babyBlob(uint ancho, uint alto, double Speed_)
@@ -25,6 +24,5 @@ babyBlob::babyBlob(uint ancho, uint alto, double Speed_)
 	blobDirection = rand() % 360;
 	maxFoodCount = BABYMAXFOOD;
 	isAliveFlag = ALIVE;
-	bitmapSize = 20;
 
 }
