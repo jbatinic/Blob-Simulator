@@ -134,7 +134,7 @@ int main(int, char**)
                         start++;
                     }
                     start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode, smell_radius);
-                    mort_rate = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+                    
                 }
             }
         }

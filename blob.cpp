@@ -113,7 +113,7 @@ void blob::blobDeath(float user_deathProb)
 {
 	if ((rand() % 100) / 100.0 < user_deathProb)
 	{		
-		//isAliveFlag = DEAD;
+		isAliveFlag = DEAD;
 		//printf("dead\n");
 	}
 	else
