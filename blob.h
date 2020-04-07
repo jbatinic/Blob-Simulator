@@ -75,6 +75,7 @@ public:
 	uint getRandomJiggle(void);
 	bool getMergeFlag(void);
 	uint getbitmapSize(void);
+	uint getMaxfoodCount(void);
 
 	//Funciones
 	void moveBlob(void);

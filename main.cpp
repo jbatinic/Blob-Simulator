@@ -244,26 +244,27 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
 
     uint i;
 
-    for (i = 0; i < maxblob; i++)
+    for (i = 0; i < blob::blobTotalCount; i++)
     {
         //ME FALTA CORREGIR LA SUMA DE LOS RADIOS(DEJARLO MAS PROLIJO Y CAMBIAR EL BACKEND)
-        if (blobArray[i].getblobStatus())
+        if (blobArray[i].getblobStatus() && blobArray[i].getMaxfoodCount() == BABYMAXFOOD)
         {
+            //printf("%i", blobArray[i].getMaxfoodCount());
             al_draw_bitmap(baby, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
             al_draw_circle(blobArray[i].getPosx() + 20, blobArray[i].getPosy() + 20, blobArray[i].getblobRadius() + 20, al_color_name("red"), 2.0);
         }
-        /*
-        else if (blobArray[i].getblobStatus() && blobArray[i].getfoodCount() == GROWNMAXFOOD)
+
+        else if (blobArray[i].getblobStatus() && blobArray[i].getMaxfoodCount() == GROWNMAXFOOD)
         {
             al_draw_bitmap(grown, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
             al_draw_circle(blobArray[i].getPosx() + 30, blobArray[i].getPosy() + 30, blobArray[i].getblobRadius() + 30, al_color_name("red"), 2.0);
         }
-        else if (blobArray[i].getblobStatus() && blobArray[i].getfoodCount() == OLDMAXFOOD)
+        else if (blobArray[i].getblobStatus() && blobArray[i].getMaxfoodCount() == OLDMAXFOOD)
         {
             al_draw_bitmap(old, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
             al_draw_circle(blobArray[i].getPosx() + 40, blobArray[i].getPosy() + 40, blobArray[i].getblobRadius() + 40, al_color_name("red"), 2.0);
         }
-        */
+
     }
 
     for (i = 0; i < foodCount; i++)
@@ -271,6 +272,7 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
         al_draw_bitmap(food, foodArray[i].getPosx_f(), foodArray[i].getPosy_f(), 0);
     }
 }
+
 
 
 void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* relative_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate) {
