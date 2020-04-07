@@ -63,13 +63,14 @@ void blob::setRandomJiggle(uint RandomJiggle_) { RandomJiggle = RandomJiggle_;  
 *****************************************/
 double blob::getPosx(void) { return blobPos.x; }
 double blob::getPosy(void) { return blobPos.y; }
-uint blob::getblobVelocity(void) { return blobVelocity; }
+double blob::getblobVelocity(void) { return blobVelocity; }
 uint blob::getblobRadius(void) { return blobRadius; }
 uint blob::getblobDirection(void) { return blobDirection; }
 uint blob::getfoodCount(void) { return foodCount; }
 uint blob::getblobStatus(void) { return isAliveFlag; }
 uint blob::getRandomJiggle(void) { return RandomJiggle; }
 bool blob::getMergeFlag(void) { return mergeFlag; }
+uint blob::getbitmapSize(void) { return bitmapSize; }
 
 /****************************************
 *			FUNCIONES					*
@@ -120,12 +121,15 @@ void blob::blobDeath(double user_deathProb)
 
 int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
-	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobRadius * 4 * (double)blobRadius)); 
+	int blobsRadius = bitmapSize + blob2.getbitmapSize(); 
+
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)(blobsRadius*blobsRadius))); 
 	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4
 	if (checking == 1) 
 	{
 		if (blobRadius == blob2.getblobRadius())
 		{		//Si tienen el mismo radio son del mismo tipo
+			printf("MERGE\n");
 			ret_Val = MERGE;
 		}
 		else
@@ -194,18 +198,6 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 
 uint blob::increaseCount(void){return ++blobTotalCount; }
 
-void blob::blobMerge(blob* blobArray, uint* array_of_Directions, int mergeTotal)
-{ 
-	//crear un nuevo blob de tipo evolucionado
-	//direccion: suma del promedio entre los blobs obtenida en merge_new_direction
-	//posicion es misma que blob J
-	//velocidad: promedio de velocidades
 
-	//se determinan en llamada a constructor:
-	//radio -> evolucionado
-	//maxFoodcount -> evolucionado
-	blob::increaseCount();
-
-}
 
 

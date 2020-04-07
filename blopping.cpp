@@ -67,24 +67,26 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 
 void blob_smellBlob(blob* blobArray)
 {
-	uint i, j, mergeTotal, newMergeDirection, newMergeVelocity;
+	uint i, j, mergeTotal,newMergeDirection, newMergeVelocity;
 	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
-	for (j = 0, mergeTotal = 1, newMergeDirection=0, newMergeVelocity=0; j < (blob::blobTotalCount); j++)
+	uint countTemp = blob::blobTotalCount;
+	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
 	{
-		for (i = blob::blobTotalCount; i > 0 ; i--)
+		for (i = countTemp ; i > 0 ; i--)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{
 				if (do_blob_merge(&(blobArray[j]), blobArray[i]))		//vemos si hay merge entre el blob J y todosl os demas blobs
 				{				//Prepara todo para cuando hagamos merge con funcion blobMerge.
-					mergeTotal++;		//Con cuantos blobs se va a merge			
+					mergeTotal++;
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
 					blobArray[i].setblobStatus(DEAD);//matamos a blob i 
 				}
 			}
 		}
-		if (blobArray[j].getMergeFlag())
+
+		if ((blobArray[j].getblobStatus() == ALIVE) && (blobArray[j].getMergeFlag() == true))
 		{
 			blobArray[j].increaseCount();
 			newMergeDirection += blobArray[j].getblobDirection();
@@ -96,19 +98,21 @@ void blob_smellBlob(blob* blobArray)
 			{
 			case BABYRADIO:
 				//create new grown blob
-				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
+				blobArray[blob::blobTotalCount] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//Matamos a blob J
 				break;
-
+				
 			case GROWNRADIO:
 				//create new old blob 
-				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity/mergeTotal);
+				blobArray[blob::blobTotalCount] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / mergeTotal);
 				blobArray[j].setblobStatus(DEAD);//matamos a blob J
 				break;
 			default:
 				break;
 			}
 		}
+		else
+			printf("no merge \n");
 	}
 }
 
@@ -128,6 +132,7 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	case MERGE:
 		if (blob1->getblobRadius() != OLDRADIO)
 		{
+			printf("merge\n");
 			blob1->setMergeFlag();
 			return_val = true;
 		}
@@ -149,12 +154,12 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 
 void setNewDeathProb(blob* blobArray)
 {
-	double babyProb, grownProb, oldProb;
+	float babyProb, grownProb, oldProb;
 	babyProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
 	grownProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
 	oldProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
 	int i;
-	for (i = 0; i < blob::blobTotalCount; i++)
+	for (i = 0; i < blob::blobTotalCount ; i++)
 	{
 		switch (blobArray[i].getblobRadius())
 		{

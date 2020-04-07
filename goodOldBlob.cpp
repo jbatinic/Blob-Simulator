@@ -10,6 +10,7 @@ goodOldBlob::goodOldBlob() {
 	blobDirection = 0;
 	maxFoodCount = 0;
 	isAliveFlag = 0;
+	bitmapSize = 0;
 }
 
 goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double percentSpeed_)
@@ -24,6 +25,7 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double per
 	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
 	isAliveFlag = ALIVE;
+	bitmapSize = 80;
 }
 
 //HACE FALTA ESTA FUNCION??

@@ -67,14 +67,14 @@ public:
 	//Getters
 	double getPosx(void);
 	double getPosy(void);
-	uint getblobVelocity(void);
+	double getblobVelocity(void);
 	uint getblobRadius(void);
 	uint getblobDirection(void);
 	uint getblobStatus(void);
 	uint getfoodCount(void);
 	uint getRandomJiggle(void);
 	bool getMergeFlag(void);
-	
+	uint getbitmapSize(void);
 
 	//Funciones
 	void moveBlob(void);
@@ -83,7 +83,6 @@ public:
 	void changeDirection(food* fruta);
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
-	void blobMerge(blob* blobArray, uint*array_of_Directions, int mergeTotal);
 	void blobDeath(double userDeathProb);
 
 protected:
@@ -99,6 +98,7 @@ protected:
 	uint blobMergeDirection;
 	bool mergeFlag;
 	uint RandomJiggle; 
+	uint bitmapSize;
 };
 
 
