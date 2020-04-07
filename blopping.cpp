@@ -20,18 +20,15 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 		if (blobArray[j].getblobStatus())
 		{
 			blobArray[j].moveBlob();
-			//blobArray[j].blobDeath(user_deathProb);
+		    blobArray[j].blobDeath(user_deathProb);
 		}
 
 		
 	}
-	setNewDeathProb(blobArray);
 	
 }
 
-/**************************************************************
-*															  *
-***************************************************************/
+
 
 void blob_smellRadius(blob* blobArray, food* frutaArray)
 {
@@ -51,8 +48,6 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 			case 2:
 				blobArray[j].setfoodCount((blobArray[j].getfoodCount()) + 1);
 				blobArray[j].blobFeeding(blobArray);	
-				//ACA TAMBIEN PODRIAMOS HACER OTRA COSA PARA CONSEGUIR
-				//CON EL NUMER ORANDOM PERO AHORA ME DA PAJA QUIERO VERLO FUNCIONAR ANTES
 
 				//cambiamos el lugar de la fruta recien comida por uno random entre la posicion x e y de donde acaba de ser comida
 				frutaArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[j].getPosx())));
@@ -68,7 +63,7 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 void blob_smellBlob(blob* blobArray)
 {
 	uint i, j, mergeTotal,newMergeDirection, newMergeVelocity;
-	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
+	//printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
 	uint countTemp = blob::blobTotalCount;
 	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
 	{
@@ -93,7 +88,7 @@ void blob_smellBlob(blob* blobArray)
 			newMergeVelocity += blobArray[j].getblobVelocity();
 
 			newMergeDirection = randomJiggle(newMergeDirection, blobArray[j].getRandomJiggle());
-			printf("ESTA NACIENDO ALGO\n");
+			//printf("ESTA NACIENDO ALGO\n");
 			switch (blobArray[j].getblobRadius())
 			{
 			case BABYRADIO:
@@ -111,8 +106,10 @@ void blob_smellBlob(blob* blobArray)
 				break;
 			}
 		}
-		else
-			printf("no merge \n");
+		else {
+			//printf("no merge \n");
+		}
+			
 	}
 }
 
@@ -132,7 +129,7 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	case MERGE:
 		if (blob1->getblobRadius() != OLDRADIO)
 		{
-			printf("merge\n");
+			//printf("merge\n");
 			blob1->setMergeFlag();
 			return_val = true;
 		}
@@ -152,26 +149,4 @@ bool do_blob_merge(blob* blob1, blob& blob2)		//DUDA puedo destruir clase si la 
 	return return_val;
 }
 
-void setNewDeathProb(blob* blobArray)
-{
-	float babyProb, grownProb, oldProb;
-	babyProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	grownProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	oldProb = static_cast <float>(rand()) / static_cast <float> (RAND_MAX);
-	int i;
-	for (i = 0; i < blob::blobTotalCount ; i++)
-	{
-		switch (blobArray[i].getblobRadius())
-		{
-		case BABYRADIO:
-			blobArray[i].setDeathProb(babyProb);
-			break;
-		case GROWNRADIO:
-			blobArray[i].setDeathProb(grownProb);
-			break;
-		case OLDRADIO:
-			blobArray[i].setDeathProb(oldProb);
-			break;
-		}
-	}
-}
+

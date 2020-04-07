@@ -115,10 +115,15 @@ void blob::moveBlob()
 
 void blob::blobDeath(double user_deathProb)
 {
-	if (deathProb < user_deathProb)
+	if ((rand() % 100) / 100.0 < user_deathProb)
 	{
-		isAliveFlag = DEAD;
+		//isAliveFlag = DEAD;
+		printf("dead \n");
 	}
+	else {
+		printf("not \n");
+	}
+
 }
 
 int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
@@ -131,7 +136,7 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 	{
 		if (blobRadius == blob2.getblobRadius())
 		{		//Si tienen el mismo radio son del mismo tipo
-			printf("MERGE\n");
+			//printf("MERGE\n");
 			ret_Val = MERGE;
 		}
 		else
@@ -175,13 +180,15 @@ void blob::changeDirection(food* fruta)
 	
 	setDirection(newDirection);
 }
+
 void blob::blobFeeding(blob* blobArray)
-{
+{	
 	if(foodCount >= maxFoodCount)
 	{
-		blobBirth(blobArray);			//EXCEPTION READ ACCESS VIOLATION
+		foodCount = 0;
+		blobBirth(blobArray);		
 	}
-	foodCount = 0;
+	
 }
 
 void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 
