@@ -124,10 +124,9 @@ void blob::blobDeath(float user_deathProb)
 
 int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
-	int blobsRadius = bitmapSize + blob2.getbitmapSize();
-	printf("%i \n", blobsRadius);
+	int blobsRadius = 80;
 
-	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobsRadius * (double)blobsRadius  * 0.15  ) );
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobsRadius * (double)blobsRadius) );
 	int ret_Val = NOTCLOSE;																											
 	if (checking == 1)
 	{
