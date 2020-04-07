@@ -113,23 +113,27 @@ void blob::blobDeath(float user_deathProb)
 {
 	if ((rand() % 100) / 100.0 < user_deathProb)
 	{		
-		printf("dead\n");
+		//isAliveFlag = DEAD;
+		//printf("dead\n");
 	}
 	else
 	{
-		printf("not\n");
+		//printf("not\n");
 	}
 }
 
 int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
 	int blobsRadius = bitmapSize + blob2.getbitmapSize();
+	printf("%i \n", blobsRadius);
 
-	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) > ((double)blobsRadius * (double)blobsRadius  * 0.15  ) );
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobsRadius * (double)blobsRadius  * 0.15  ) );
 	int ret_Val = NOTCLOSE;																											
 	if (checking == 1)
 	{
-		if (blobRadius == blob2.getblobRadius())
+		printf("se tocaron");
+		/*
+		if (maxFoodCount == blob2.getMaxfoodCount())
 		{		//Si tienen el mismo radio son del mismo tipo
 			ret_Val = MERGE;
 			printf("merge\n");
@@ -137,7 +141,7 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 		else
 		{
 			ret_Val = BLOBSALUDO;
-		}
+		}*/
 	}
 	return ret_Val;
 }
@@ -190,7 +194,7 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 		BLOBMAXFOOD,
 		rand() % 360);
 
-	printf("nacio, %u \n", count);
+	//printf("nacio, %u \n", count);
 }
 
 uint blob::increaseCount(void) { return ++blobTotalCount; }
