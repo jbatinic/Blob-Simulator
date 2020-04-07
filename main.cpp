@@ -352,25 +352,25 @@ void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation
 
         if (ImGui::Button("Mas blobs") && *cantblobs < 50)
             (*cantblobs)++;
+
+        //h.foodCount: Cantidad de alimento.
+
         ImGui::Dummy(ImVec2(0.0f, 10.0f));
+        ImGui::TextWrapped("Cantidad de comida:");
+        ImGui::SliderInt("", food_count, 1, 50);
+        if (ImGui::Button("Menos comida") && *food_count > 1)
+            (*food_count)--;
+        if (ImGui::Button("Mas comida") && *food_count < 50)
+            (*food_count)++;
+
     }
     else {
         ImGui::TextWrapped("Parameters");
 
     }
 
-    //h.foodCount: Cantidad de alimento.
-
-    ImGui::Dummy(ImVec2(0.0f, 10.0f));
-    ImGui::TextWrapped("Cantidad de comida:");
-    ImGui::SliderInt("", food_count, 1, 50);
-    if (ImGui::Button("Menos comida") && *food_count > 1)
-        (*food_count)--;
-
     ImGui::SameLine(0.0, ImGui::GetStyle().ItemInnerSpacing.x);
 
-    if (ImGui::Button("Mas comida") && *food_count < 50)
-        (*food_count)++;
 
 
     //d.Velocidad porcentual de los blobs. (se sugiere utilizar un slider)  
