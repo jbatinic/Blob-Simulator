@@ -179,7 +179,7 @@ void blob::blobFeeding(blob* blobArray)
 	{
 		blobBirth(blobArray);			//EXCEPTION READ ACCESS VIOLATION
 	}
-
+	foodCount = 0;
 }
 
 void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 
