@@ -188,6 +188,8 @@ void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de
 		BLOBRADIO,
 		BLOBMAXFOOD,
 		rand() % 360);
+
+	printf("nacio, %u \n", count);
 }
 
 uint blob::increaseCount(void) { return ++blobTotalCount; }

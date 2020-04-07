@@ -67,7 +67,7 @@ void blobbingFeeding(blob* blobArray, uint j)
 {
 	if ((blobArray[j].getfoodCount()) >= (blobArray[j].getMaxfoodCount()))
 	{
-		blobArray[j].blobBirth(blobArray);				//No llamo a sobrecargada llamo a la de blob			
+		blobArray[j].blobBirth(blobArray);				//No llamo a babyblob sobrecargada llamo a la de blob			
 		blobArray[j].setfoodCount(0);
 	}
 }
