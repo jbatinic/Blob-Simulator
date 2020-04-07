@@ -44,7 +44,6 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 			switch ((blobArray[j].checkFood(&(frutaArray[i]))))
 			{
 			case 1:
-
 				blobArray[j].changeDirection(&(frutaArray[i]));
 
 				break;
@@ -95,7 +94,7 @@ void blob_smellBlob(blob* blobArray)
 
 		if ((blobArray[j].getblobStatus() == ALIVE) && (blobArray[j].getMergeFlag() == true))
 		{
-			blobArray[j].increaseCount();
+			//blobArray[j].increaseCount();
 			newMergeDirection += blobArray[j].getblobDirection();
 			newMergeVelocity += blobArray[j].getblobVelocity();
 

@@ -25,7 +25,7 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double per
 	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
 	isAliveFlag = ALIVE;
-	bitmapSize = 80;
+	bitmapSize = 40;
 }
 
 //HACE FALTA ESTA FUNCION??

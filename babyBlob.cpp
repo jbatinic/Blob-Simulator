@@ -25,7 +25,7 @@ babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
 	blobDirection = rand() % 360;
 	maxFoodCount = BABYMAXFOOD;
 	isAliveFlag = ALIVE;
-	bitmapSize = 40;
+	bitmapSize = 20;
 
 }
 

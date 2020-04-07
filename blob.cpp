@@ -125,13 +125,14 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 {
 	int blobsRadius = bitmapSize + blob2.getbitmapSize();
 
-	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) < ((double)blobsRadius * (double)blobsRadius));
-	int ret_Val = NOTCLOSE;																											//hacemos el cuadrado de la suma de los radios, por eso r*r*4
+	int checking = (((blobPos.x - blob2.getPosx()) * (blobPos.x - blob2.getPosx()) + (blobPos.y - blob2.getPosy()) * (blobPos.y - blob2.getPosy())) > ((double)blobsRadius * (double)blobsRadius  * 0.15  ) );
+	int ret_Val = NOTCLOSE;																											
 	if (checking == 1)
 	{
 		if (blobRadius == blob2.getblobRadius())
 		{		//Si tienen el mismo radio son del mismo tipo
 			ret_Val = MERGE;
+			printf("merge\n");
 		}
 		else
 		{
