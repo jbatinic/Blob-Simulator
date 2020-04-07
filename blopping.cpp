@@ -105,14 +105,14 @@ void blob_smellBlob(blob* blobArray)
 			case 4:
 				//create new grown blob
 				printf("newGrown\n");
-				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
+				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
 				blobArray[j].setblobStatus(DEAD);//Matamos a blob J
 				break;
 				
 			case 5:
 				//create new old blob 
 				printf("newOld\n");
-				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
+				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
 				blobArray[j].setblobStatus(DEAD);//matamos a blob J
 				break;
 			default:
@@ -142,7 +142,7 @@ bool do_blob_merge(blob* blob1, blob& blob2)
 	switch (radiusResult)  //Vemos si se superponen los bitmaps
 	{ 
 	case MERGE:
-		if (blob1->getMaxfoodCount() != OLDMAXFOOD)
+		if (blob1->getMaxfoodCount() != OLDMAXFOOD && (blob1->getMaxfoodCount() == blob1->getMaxfoodCount()))
 		{
 			blob1->setMergeFlag();
 			return_val = true;
