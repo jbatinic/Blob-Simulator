@@ -27,6 +27,7 @@ blob::blob(double posx_, double posy_ , float deathProb_, double speed_,uint rad
 {
 	blobPos.x = posx_;
 	blobPos.y = posy_;
+	blobPos.x = WIDTH;
 	deathProb = deathProb_;
 	blobRadius = radio_;
 	maxFoodCount = maxFoodCount_;
@@ -79,9 +80,9 @@ void blob::moveBlob()
 	double tempNextx, tempNexty;
 		
 		//intf("%f \n", blobVelocity);
-		tempNextx = (blobPos.x + sin(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
-		tempNexty = (blobPos.y + cos(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
-		
+		tempNextx = (blobPos.x + cos(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
+		tempNexty = (blobPos.y + sin(PI * ((double)blobDirection / 180.0)) * blobVelocity * percentSpeed);
+
 		if (tempNextx < 0)
 		{
 			tempNextx += WIDTH;
@@ -101,7 +102,8 @@ void blob::moveBlob()
 		{
 			tempNexty -= HEIGHT;
 		}
-		printf("(%f,%f) -> (%f,%f)\n", blobPos.x, blobPos.y, tempNextx, tempNexty);
+		//printf("\n\nDIRECCION DEL BLOB\n");
+		//printf("(%f,%f) -> (%f,%f)\n", blobPos.x, blobPos.y, tempNextx, tempNexty);
 		
 	
 		setPosx(tempNextx);
@@ -139,47 +141,41 @@ int blob::checkFood(food* fruta)		//COMO PUNTERO?
 	int r = blobRadius + fruta->getfoodRadius();
 	int result =0; 
 
-	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < (double)r * (double)r)
-	{
-		result = 1; //case1 SE ACERCA
-	}
-	else if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < ((double)r* (double)r*0.25))
+	if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < ((double)r* (double)r*0.15))
 	{//Estan casi superpuestos
 		result = 2; //case2 SE LO COME
 	}
+	else if (((blobPos.x - fruta->getPosx_f()) * (blobPos.x - fruta->getPosx_f()) + (blobPos.y - fruta->getPosy_f()) * (blobPos.y - fruta->getPosy_f())) < (double)r * (double)r)
+	{
+		result = 1; //case1 SE ACERCA
+	}
+
 
 	return result;
 }
 
 void blob::changeDirection(food* fruta)
 {
-	uint newDirection;
+	float newDirection;
 	double change_x = blobPos.x - fruta->getPosx_f();
 	double change_y = blobPos.y - fruta->getPosy_f();
 
-	if (change_y > 0)
-	{
-		newDirection = (uint) atan(change_y / (absolute(change_y)));			//fruta abajo de blob
-		if (change_x > 0)
-			newDirection += 180;
-		else
-			newDirection = 180 - newDirection;
-	}
-	else                                                             //Fruta encima de blob
-	{
-		newDirection = (uint) atan(absolute(change_x) / (change_y * (-1)));
-		if (change_x > 0)
-			newDirection = 360 - newDirection;
-	}
+
+	newDirection = atan2(change_y , change_x);	
+
+	newDirection = ( (newDirection * (float)180 ) / PI );
+
+	newDirection += 180;
+	
 	setDirection(newDirection);
 }
-
 void blob::blobFeeding(blob* blobArray)
 {
 	if(foodCount >= maxFoodCount)
 	{
 		blobBirth(blobArray);			//EXCEPTION READ ACCESS VIOLATION
 	}
+
 }
 
 void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 

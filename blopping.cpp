@@ -40,23 +40,23 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 	{
 		for (i = 0; i < (frutaArray[i].getfoodTotal()); i++)
 		{
+			
 			switch ((blobArray[j].checkFood(&(frutaArray[i]))))
 			{
 			case 1:
-				blobArray[j].changeDirection(&(frutaArray[i]));
 
+				blobArray[j].changeDirection(&(frutaArray[i]));
+				
 				break;
 			case 2:
 				blobArray[j].setfoodCount((blobArray[j].getfoodCount()) + 1);
 				blobArray[j].blobFeeding(blobArray);	
-
 				//ACA TAMBIEN PODRIAMOS HACER OTRA COSA PARA CONSEGUIR
 				//CON EL NUMER ORANDOM PERO AHORA ME DA PAJA QUIERO VERLO FUNCIONAR ANTES
 
 				//cambiamos el lugar de la fruta recien comida por uno random entre la posicion x e y de donde acaba de ser comida
 				frutaArray[i].setPosx_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[j].getPosx())));
 				frutaArray[i].setPosy_f(static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / blobArray[j].getPosy())));
-
 				break;
 			default:
 				break;
@@ -91,7 +91,7 @@ void blob_smellBlob(blob* blobArray)
 			newMergeVelocity += blobArray[j].getblobVelocity();
 
 			newMergeDirection = randomJiggle(newMergeDirection, blobArray[j].getRandomJiggle());
-
+			printf("ESTA NACIENDO ALGO\n");
 			switch (blobArray[j].getblobRadius())
 			{
 			case BABYRADIO:

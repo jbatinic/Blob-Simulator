@@ -161,7 +161,7 @@ int main(int, char**)
         if (!main_menu) {
             print_al(blobArray, foodArray, MAXBLOBS, cantblobs, food_count, babyBlobSprite, grownBlobSprite, goodOldBlobSprite, foodSprite);
         }
-        printf("%f \n" , max_velocity);
+       // printf("%f \n" , max_velocity);
 
 
         ImGui_ImplAllegro5_RenderDrawData(ImGui::GetDrawData());
@@ -219,7 +219,9 @@ void create_world(blob* blobArray, food* foodArray, int food_count, int cantblob
     for (i = 0; i < food_count; i++)
     {
         foodArray[i] = food((static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / WIDTH))), (static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / HEIGHT))));
+
     }
+
 
     if (simulation_mode == MODO1)
     {

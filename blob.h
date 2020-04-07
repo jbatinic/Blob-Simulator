@@ -21,6 +21,9 @@
 #define DEAD 0 
 #define ALIVE 1
 
+#define SEARCHING 2 
+#define GOING 3
+
 #define BLOBSPEED 1.0
 #define BLOBRADIO 5
 #define BLOBMAXFOOD 5
