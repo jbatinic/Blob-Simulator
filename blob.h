@@ -26,7 +26,7 @@
 
 #define BLOBSPEED 1.0
 #define BLOBRADIO 4
-#define BLOBMAXFOOD 3
+#define BLOBMAXFOOD 5
 
 typedef struct
 {
