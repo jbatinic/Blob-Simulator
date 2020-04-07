@@ -3,7 +3,7 @@
 
 #include "blob.h"
 #define BABYRADIO 4
-#define BABYMAXFOOD 3
+#define BABYMAXFOOD 5
 
 class babyBlob :
 	public blob

@@ -13,7 +13,7 @@ goodOldBlob::goodOldBlob() {
 	bitmapSize = 0;
 }
 
-goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double percentSpeed_)
+goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Speed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = posx_;
@@ -21,7 +21,7 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double per
 	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	foodCount = 0;
 	blobRadius = OLDRADIO;
-	percentSpeed = percentSpeed_;
+	blobVelocity = Speed_;
 	blobDirection = direction_;
 	maxFoodCount = OLDMAXFOOD;
 	isAliveFlag = ALIVE;

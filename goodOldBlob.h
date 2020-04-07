@@ -3,7 +3,7 @@
 
 #include "blob.h"
 #define OLDRADIO 8
-#define OLDMAXFOOD 5
+#define OLDMAXFOOD 3
 
 class goodOldBlob :
 	public blob

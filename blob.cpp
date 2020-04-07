@@ -132,7 +132,7 @@ int blob::checkRadius(blob& blob2)		//COMO REFERENCIA?
 	{
 		//printf("se tocaron");
 		
-		if (maxFoodCount == blob2.getMaxfoodCount() && (blobPos.x> 50) && (blobPos.x< (WIDTH-50)))
+		if (maxFoodCount == blob2.getMaxfoodCount() && (blobPos.x> 100) && (blobPos.x< (WIDTH-100)))
 		{		//Si tienen el mismo radio son del mismo tipo
 			ret_Val = MERGE;		
 		}

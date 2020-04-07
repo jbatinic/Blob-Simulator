@@ -13,7 +13,7 @@ babyBlob::babyBlob() {
 	bitmapSize = 0;
 }
 
-babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
+babyBlob::babyBlob(uint ancho, uint alto, double Speed_)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (ancho)));
@@ -21,7 +21,7 @@ babyBlob::babyBlob(uint ancho, uint alto, double percentSpeed_)
 	deathProb = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	foodCount = 0;
 	blobRadius = BABYRADIO;
-	percentSpeed = percentSpeed_;
+	blobVelocity = Speed_;
 	blobDirection = rand() % 360;
 	maxFoodCount = BABYMAXFOOD;
 	isAliveFlag = ALIVE;

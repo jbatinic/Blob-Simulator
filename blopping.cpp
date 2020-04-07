@@ -102,7 +102,7 @@ void blob_smellBlob(blob* blobArray)
 
 			switch (blobArray[j].getMaxfoodCount())
 			{
-			case 3:
+			case 5:
 				//create new grown blob
 				printf("newGrown\n");
 				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / (double)mergeTotal);
