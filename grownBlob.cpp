@@ -13,7 +13,7 @@ grownBlob::grownBlob() {
 	bitmapSize = 0;
 }
 
-grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_)
+grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_, double percent_speed)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = posx_;
@@ -26,6 +26,8 @@ grownBlob::grownBlob(double posx_, double posy_, uint direction_, double Speed_)
 	maxFoodCount = GROWNMAXFOOD;
 	isAliveFlag = ALIVE;
 	bitmapSize = 22;
+	percentSpeed = percent_speed;
+
 }
 
 //HACE FALTA ESTA FUNCION?

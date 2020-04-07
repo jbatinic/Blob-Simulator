@@ -79,7 +79,7 @@ void blob_smellBlob(blob* blobArray)
 	uint countTemp = blob::blobTotalCount;
 	for (j = 0, mergeTotal=0, newMergeDirection=0, newMergeVelocity=0; j < countTemp; j++)
 	{
-		for (i = countTemp; i > 0; i--)
+		for (i=0; i < countTemp;  i++)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{
@@ -88,7 +88,7 @@ void blob_smellBlob(blob* blobArray)
 					mergeTotal++;
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
-					//blobArray[i].setblobStatus(DEAD);//matamos a blob i 
+					
 				}
 			}
 		}
@@ -102,17 +102,17 @@ void blob_smellBlob(blob* blobArray)
 
 			switch (blobArray[j].getMaxfoodCount())
 			{
-			case 5:
+			case 4:
 				//create new grown blob
 				printf("newGrown\n");
-				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / (double)mergeTotal);
+				blobArray[blob::increaseCount()] = grownBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
 				blobArray[j].setblobStatus(DEAD);//Matamos a blob J
 				break;
 				
-			case 4:
+			case 5:
 				//create new old blob 
 				printf("newOld\n");
-				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity / (double) mergeTotal);
+				blobArray[blob::increaseCount()] = goodOldBlob(blobArray[j].getPosx(), blobArray[j].getPosy(), newMergeDirection, newMergeVelocity, blobArray[j].getpercentSpeed());
 				blobArray[j].setblobStatus(DEAD);//matamos a blob J
 				break;
 			default:
@@ -142,11 +142,11 @@ bool do_blob_merge(blob* blob1, blob& blob2)
 	switch (radiusResult)  //Vemos si se superponen los bitmaps
 	{ 
 	case MERGE:
-		if (blob1->getblobRadius() != OLDRADIO)
+		if (blob1->getMaxfoodCount() != OLDMAXFOOD)
 		{
 			blob1->setMergeFlag();
 			return_val = true;
-			printf("merge\n");
+			//printf("merge\n");
 		}
 		else
 		{

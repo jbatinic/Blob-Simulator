@@ -10,7 +10,7 @@ class grownBlob :
 {
 public:
 	grownBlob();
-	grownBlob(double posx_, double posy_, uint direction_, double percentSpeed_);
+	grownBlob(double posx_, double posy_, uint direction_, double Speed_, double Speed);
 //	virtual void blobMerge(grownBlob* blobArray, uint* array_of_Directions, int mergeTotal);
 //	virtual void blobBirth(grownBlob* blob);
 };

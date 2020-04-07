@@ -13,7 +13,7 @@ goodOldBlob::goodOldBlob() {
 	bitmapSize = 0;
 }
 
-goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Speed_)
+goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Speed_, double percent_speed)
 {
 	//https://stackoverflow.com/questions/686353/random-float-number-generation 
 	blobPos.x = posx_;
@@ -26,6 +26,7 @@ goodOldBlob::goodOldBlob(double posx_, double posy_, uint direction_, double Spe
 	maxFoodCount = OLDMAXFOOD;
 	isAliveFlag = ALIVE;
 	bitmapSize = 40;
+	percentSpeed = percent_speed;
 }
 
 //HACE FALTA ESTA FUNCION??
