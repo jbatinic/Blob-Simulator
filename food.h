@@ -31,5 +31,4 @@ protected:
 	unsigned int foodRadius;
 	
 };
-
 #endif

@@ -24,4 +24,4 @@ void food::setfoodRadius() { foodRadius = FOODRADIUS; }
 unsigned int food::getfoodRadius(void) { return foodRadius; }
 unsigned int food::getfoodTotal(void) { return foodTotalCount; }
 double food::getPosx_f(void) { return foodPosx; }
-double food::getPosy_f(void) { return foodPosy;  }
+double food::getPosy_f(void) { return foodPosy; }

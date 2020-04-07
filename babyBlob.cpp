@@ -28,18 +28,3 @@ babyBlob::babyBlob(uint ancho, uint alto, double Speed_)
 	bitmapSize = 20;
 
 }
-
-void babyBlob::blobBirth(babyBlob* blobArray)
-{
-	uint count = blob::increaseCount();
-	blobArray[count] = babyBlob(WIDTH,HEIGHT,blobArray[0].getblobVelocity());
-
-}
-
-/*
-void babyBlob::blobMerge(babyBlob* blobArray, babyBlob* blob1, babyBlob* blob2)
-{
-
-}
-
-*/

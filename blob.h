@@ -58,8 +58,6 @@ public:
 	void setfoodCount(uint foodCount_);
 	void setRadio(uint radio_);
 	void setPercentSpeed(float percentSpeed_);
-//	void setMaxfoodCount(uint maxFoodCount_);
-//	void setNewMergeDirection(uint blobMergeDirection_);
 	void setMergeFlag(void);
 	void setblobStatus(uint isAliveFlag);
 	void setRandomJiggle(uint RandomJiggle_);
@@ -83,8 +81,7 @@ public:
 	int checkRadius(blob& blob2);
 	int checkFood(food* fruta);
 	void changeDirection(food* fruta);
-	//void blobFeeding(blob* blobArray);
-	virtual void blobBirth(blob* blobArray);
+	void blobBirth(blob* blobArray);
 	void blobDeath(float userDeathProb);
 
 protected:
