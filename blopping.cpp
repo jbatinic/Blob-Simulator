@@ -68,10 +68,10 @@ void blob_smellRadius(blob* blobArray, food* frutaArray)
 void blob_smellBlob(blob* blobArray)
 {
 	uint i, j, mergeTotal, newMergeDirection, newMergeVelocity;
-
+	printf("blob::blobTotalCount = %d\n", blob::blobTotalCount);
 	for (j = 0, mergeTotal = 1, newMergeDirection=0, newMergeVelocity=0; j < (blob::blobTotalCount); j++)
 	{
-		for (i =0 ; i < blob::blobTotalCount ; i++)
+		for (i = blob::blobTotalCount; i > 0 ; i--)
 		{
 			if (i != j)			//Si i=j estamos comparando el mismo elemento
 			{
