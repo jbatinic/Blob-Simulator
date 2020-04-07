@@ -10,8 +10,8 @@
 
 #include "blopping.h"
 
-#define MAXBLOBS 700
-#define MAXFRUTA 400
+#define MAXBLOBS 10000
+#define MAXFRUTA 4000
 #define VMIN 1.0
 #define MODO1 1
 #define MODO2 2
@@ -20,7 +20,6 @@
 int randomVelocity(int vmax, int vmin);
 
 using namespace std;
-
 
 void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* rel_velocity, int* smell_radius, int* random_jiggle_limit, float* mortality_rate);
 void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, uint foodCount, ALLEGRO_BITMAP* baby, ALLEGRO_BITMAP* grown, ALLEGRO_BITMAP* old, ALLEGRO_BITMAP* food);
@@ -42,7 +41,7 @@ int main(int, char**)
     ALLEGRO_BITMAP* background = al_load_bitmap("./blob-sprites/background.jpg");
     if (background == NULL) {
         std::cout << "Couldn't load background image!" << std::endl;
-        return -1;
+       return -1;
     }
     al_set_window_title(display, "Dear ImGui Allegro 5 example");
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
@@ -54,22 +53,22 @@ int main(int, char**)
     ALLEGRO_BITMAP* babyBlobSprite = al_load_bitmap("./blob-sprites/babyblob.png");
     if (babyBlobSprite == NULL) {
         std::cout << "Couldn't load babyBlob image!" << std::endl;
-        //return -1;
+        return -1;
     }
     ALLEGRO_BITMAP* grownBlobSprite = al_load_bitmap("./blob-sprites/grownblob.png");
     if (grownBlobSprite == NULL) {
         std::cout << "Couldn't load grownBlob image!" << std::endl;
-        //return -1;
+        return -1;
     }
     ALLEGRO_BITMAP* goodOldBlobSprite = al_load_bitmap("./blob-sprites/goodoldblob.png");
     if (goodOldBlobSprite == NULL) {
         std::cout << "Couldn't load goodOldBlob image!" << std::endl;
-        //return -1;
+        return -1;
     }
     ALLEGRO_BITMAP* foodSprite = al_load_bitmap("./blob-sprites/food.png");
     if (foodSprite == NULL) {
         std::cout << "Couldn't load food image!" << std::endl;
-        //return -1;
+        return -1;
     }
 
 
@@ -110,6 +109,7 @@ int main(int, char**)
     //Arreglos de comidas y blobs
     food* foodArray = new food[MAXFRUTA];
     blob* blobArray = new babyBlob[MAXBLOBS];
+
     al_start_timer(timer);
 
     while (running)
@@ -129,12 +129,11 @@ int main(int, char**)
             if (ev.type == ALLEGRO_EVENT_TIMER) {
                 if (main_menu == false)
                 {
-                    if (start == 0) {
+                    if (start == 0) {   
                         create_world(blobArray, foodArray, food_count, cantblobs, mort_rate, relative_velocity, smell_radius, random_j_l, simulation_mode, max_velocity);
                         start++;
                     }
-                    start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode, smell_radius);
-                    
+                start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode, smell_radius);                   
                 }
             }
         }
@@ -148,8 +147,6 @@ int main(int, char**)
             //ImGui::ShowDemoWindow(&show_demo_window);
         }
        
-
-
         // Rendering
         ImGui::Render();
 
@@ -252,17 +249,17 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
         {
             //printf("%i", blobArray[i].getMaxfoodCount());
             al_draw_bitmap(baby, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
-            al_draw_circle(blobArray[i].getPosx() + 20, blobArray[i].getPosy() + 20, blobArray[i].getblobRadius() + 20, al_color_name("red"), 2.0);
+            //al_draw_circle(blobArray[i].getPosx() + 20, blobArray[i].getPosy() + 20, blobArray[i].getblobRadius() + 20, al_color_name("red"), 2.0);
         }
         else if (blobArray[i].getblobStatus() && blobArray[i].getMaxfoodCount() == GROWNMAXFOOD)
         {
             al_draw_bitmap(grown, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
-            al_draw_circle(blobArray[i].getPosx() + 30, blobArray[i].getPosy() + 30, blobArray[i].getblobRadius() + 30, al_color_name("red"), 2.0);
+            //al_draw_circle(blobArray[i].getPosx() + 30, blobArray[i].getPosy() + 30, blobArray[i].getblobRadius() + 30, al_color_name("red"), 2.0);
         }
         else if (blobArray[i].getblobStatus() && blobArray[i].getMaxfoodCount() == OLDMAXFOOD)
         {
             al_draw_bitmap(old, blobArray[i].getPosx(), blobArray[i].getPosy(), 0);
-            al_draw_circle(blobArray[i].getPosx() + 40, blobArray[i].getPosy() + 40, blobArray[i].getblobRadius() + 40, al_color_name("red"), 2.0);
+            //al_draw_circle(blobArray[i].getPosx() + 40, blobArray[i].getPosy() + 40, blobArray[i].getblobRadius() + 40, al_color_name("red"), 2.0);
         }
         
     }

@@ -27,7 +27,7 @@ blob::blob(double posx_, double posy_, float deathProb_, double speed_, uint rad
 {
 	blobPos.x = posx_;
 	blobPos.y = posy_;
-	blobPos.x = WIDTH;
+//	blobPos.x = WIDTH;
 	deathProb = deathProb_;
 	blobRadius = radio_;
 	maxFoodCount = maxFoodCount_;
@@ -39,7 +39,6 @@ blob::blob(double posx_, double posy_, float deathProb_, double speed_, uint rad
 	isAliveFlag = ALIVE;
 	blobVelocity = 0;	//La inicializo pero vamos a escribir sobre ella depsues
 	RandomJiggle = RandomJiggle_;
-
 }
 
 /****************************************

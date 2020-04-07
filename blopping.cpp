@@ -10,7 +10,7 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 	blob_smellBlob(blobArray);
 	if (simulation_mode == 1)
 	{
-		for (i = 0; i < 700; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
+		for (i = 0; i < (blob::blobTotalCount) ; i++)             //Seteamos velocidades para todos los existentes y futuros blobs para tenerlos listo en blobBirth
 		{
 			blobArray[i].setVelocity(v_max);
 			blobArray[i].setRadio(smell_Radius);
@@ -88,7 +88,7 @@ void blob_smellBlob(blob* blobArray)
 					mergeTotal++;
 					newMergeDirection += blobArray[i].getblobDirection();
 					newMergeVelocity += blobArray[i].getblobVelocity();
-					
+					blobArray[i].setblobStatus(DEAD);//Matamos a blob i
 				}
 			}
 		}
@@ -142,11 +142,10 @@ bool do_blob_merge(blob* blob1, blob& blob2)
 	switch (radiusResult)  //Vemos si se superponen los bitmaps
 	{ 
 	case MERGE:
-		if (blob1->getMaxfoodCount() != OLDMAXFOOD && (blob1->getMaxfoodCount() == blob1->getMaxfoodCount()))
+		if (blob1->getMaxfoodCount() != OLDMAXFOOD && (blob1->getMaxfoodCount() == blob2.getMaxfoodCount()))
 		{
 			blob1->setMergeFlag();
 			return_val = true;
-			//printf("merge\n");
 		}
 		else
 		{
