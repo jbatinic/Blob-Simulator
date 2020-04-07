@@ -103,15 +103,12 @@ void blob::moveBlob()
 		{
 			tempNexty -= HEIGHT;
 		}
-		//printf("\n\nDIRECCION DEL BLOB\n");
-		//printf("(%f,%f) -> (%f,%f)\n", blobPos.x, blobPos.y, tempNextx, tempNexty);
-		
-	
+
 		setPosx(tempNextx);
 		setPosy(tempNexty);
 }
 
-void blob::blobDeath(double user_deathProb)
+void blob::blobDeath(float user_deathProb)
 {
 	if (deathProb < user_deathProb)
 	{
@@ -177,9 +174,10 @@ void blob::blobFeeding(blob* blobArray)
 {
 	if(foodCount >= maxFoodCount)
 	{
-		blobBirth(blobArray);			//EXCEPTION READ ACCESS VIOLATION
+		blobBirth(blobArray);	
+		foodCount = 0;
 	}
-	foodCount = 0;
+
 }
 
 void blob::blobBirth(blob* blobArray)			//Esta sera sobreescrita en cada tipo de blob. 

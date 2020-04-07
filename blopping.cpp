@@ -15,18 +15,17 @@ void start_blopping(blob* blobArray, food* fruitArray_, float user_deathProb, fl
 			blobArray[i].setVelocity(v_max);
 		}
 	}
+
 	for (j = 0; j<(blob::blobTotalCount); j++)
 	{
 		if (blobArray[j].getblobStatus())
 		{
 			blobArray[j].moveBlob();
-			//blobArray[j].blobDeath(user_deathProb);
+			blobArray[j].blobDeath(user_deathProb);
 		}
-
 		
-	}
+	}	
 	setNewDeathProb(blobArray);
-	
 }
 
 /**************************************************************

@@ -22,7 +22,7 @@ int randomVelocity(int vmax, int vmin);
 using namespace std;
 
 
-void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* rel_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate);
+void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* rel_velocity, int* smell_radius, int* random_jiggle_limit, float* mortality_rate);
 void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, uint foodCount, ALLEGRO_BITMAP* baby, ALLEGRO_BITMAP* grown, ALLEGRO_BITMAP* old, ALLEGRO_BITMAP* food);
 void create_world(blob* blobArray, food* foodArray, int food_count, int cantblobs, int mort_rate, int relative_velocity, int smell_radius, int random_j_l, int simulation_mode, float vmax);
 
@@ -104,7 +104,7 @@ int main(int, char**)
     int relative_velocity = 1;
     int smell_radius = 100;
     int random_j_l = 1;
-    double mort_rate = 0.5;
+    float mort_rate = 0;
     int start = 0;
 
     //Arreglos de comidas y blobs
@@ -134,6 +134,7 @@ int main(int, char**)
                         start++;
                     }
                     start_blopping(blobArray, foodArray, mort_rate, max_velocity, simulation_mode);
+                    mort_rate = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
                 }
             }
         }
@@ -273,7 +274,7 @@ void print_al(blob* blobArray, food* foodArray, uint maxblob, uint blobCount, ui
 }
 
 
-void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* relative_velocity, int* smell_radius, int* random_jiggle_limit, double* mortality_rate) {
+void print_gui(bool* main_menu, int* cantblobs, int* food_count, int* simulation_mode, float* max_velocity, int* relative_velocity, int* smell_radius, int* random_jiggle_limit, float* mortality_rate) {
 
     ImGuiWindowFlags window_flags = 0;
     if (*main_menu) {

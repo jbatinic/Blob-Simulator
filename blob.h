@@ -83,7 +83,7 @@ public:
 	void changeDirection(food* fruta);
 	void blobFeeding(blob* blobArray);
 	virtual void blobBirth(blob* blobArray);
-	void blobDeath(double userDeathProb);
+	void blobDeath(float userDeathProb);
 
 protected:
 	position_t blobPos;
@@ -91,7 +91,7 @@ protected:
 	double blobVelocity;
 	uint blobRadius;
 	uint isAliveFlag;
-	double deathProb;
+	float deathProb;
 	uint foodCount;
 	double percentSpeed;
 	uint maxFoodCount;
